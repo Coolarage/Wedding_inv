@@ -67,10 +67,6 @@
     set("maps-link", ui.openMaps || "Open location in Maps");
     set("gallery-heading", ui.galleryTitle || "Our memories");
     set("gallery-lead", ui.galleryLead || "A little stack of our favorite moments");
-    set(
-      "photo-stack-hint",
-      ui.stackTapHint || "Memories shuffle automatically"
-    );
     set("stack-label-left", ui.stackLabelLeft || "💕");
     set("stack-label-right", ui.stackLabelRight || "✨");
     set("back-to-top", ui.backToTop || "Back to top");
