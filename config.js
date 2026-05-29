@@ -9,11 +9,15 @@ window.WEDDING_CONFIG = {
     nameEn: "La Terrace, JW Marriott",
     areaEn: "Fifth Settlement, Cairo",
     mapsUrl:
-      "https://www.google.com/maps/search/?api=1&query=JW+Marriott+Cairo+Hotel+Fifth+Settlement",
+      "https://www.google.com/maps/place/Club+House/@30.07078,31.4359958,18z/data=!4m6!3m5!1s0x145817197b9f1de9:0x1bf309708d796b1f!8m2!3d30.0699596!4d31.4344754!16s%2Fg%2F11vdbcj_fv?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D",
   },
   eventEn: {
-    dateLine: "Tuesday · 30 September 2026",
+    dateLine: "Wednesday · 30 September 2026",
     dateDetail: "30 / 9 / 2026",
+  },
+  eventAr: {
+    dateLine: "الأربعاء · ٣٠ سبتمبر ٢٠٢٦",
+    dateDetail: "٣٠ / ٩ / ٢٠٢٦",
   },
   /** Always shown in Arabic on both invitation pages. */
   quranVerse: {
