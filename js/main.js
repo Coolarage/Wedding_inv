@@ -121,10 +121,22 @@
     if (footerEmoji) footerEmoji.textContent = copy.footerEmoji || "💕";
 
     const eventEn = cfg.eventEn || {};
-    document.getElementById("wedding-date").textContent =
-      eventEn.dateLine || "Tuesday · 30 September 2026";
-    document.getElementById("detail-date").textContent =
-      eventEn.dateDetail || "30 / 9 / 2026";
+    const eventAr = cfg.eventAr || {};
+    const dateLine =
+      pageLang === "ar"
+        ? eventAr.dateLine || "الأربعاء · ٣٠ سبتمبر ٢٠٢٦"
+        : eventEn.dateLine || "Wednesday · 30 September 2026";
+    const dateDetail =
+      pageLang === "ar"
+        ? eventAr.dateDetail || "٣٠ / ٩ / ٢٠٢٦"
+        : eventEn.dateDetail || "30 / 9 / 2026";
+
+    const weddingDateEl = document.getElementById("wedding-date");
+    weddingDateEl.textContent = dateLine;
+    weddingDateEl.lang = pageLang === "ar" ? "ar" : "en";
+    document.getElementById("detail-date").textContent = dateDetail;
+    document.getElementById("detail-date").lang =
+      pageLang === "ar" ? "ar" : "en";
 
     const names = getNames();
     document.getElementById("groom-name").textContent = names.heroGroom;

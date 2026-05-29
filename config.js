@@ -12,8 +12,12 @@ window.WEDDING_CONFIG = {
       "https://www.google.com/maps/search/?api=1&query=JW+Marriott+Cairo+Hotel+Fifth+Settlement",
   },
   eventEn: {
-    dateLine: "Tuesday · 30 September 2026",
+    dateLine: "Wednesday · 30 September 2026",
     dateDetail: "30 / 9 / 2026",
+  },
+  eventAr: {
+    dateLine: "الأربعاء · ٣٠ سبتمبر ٢٠٢٦",
+    dateDetail: "٣٠ / ٩ / ٢٠٢٦",
   },
   /** Always shown in Arabic on both invitation pages. */
   quranVerse: {
