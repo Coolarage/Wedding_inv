@@ -33,6 +33,13 @@ window.WEDDING_CONFIG = {
     "Photo6.jpeg",
     "Photo7.jpeg",
   ],
+  /**
+   * RSVP → Google Sheet via Apps Script (see google-apps-script/Code.gs).
+   * Paste your Web app URL after deploying. Leave empty until ready.
+   */
+  rsvp: {
+    scriptUrl: "",
+  },
 };
 
 window.INVITATION_COPY = {
@@ -53,6 +60,16 @@ window.INVITATION_COPY = {
     footerEmoji: "💕",
     footerNamesJoin: " و ",
     photoAltPrefix: "ذكرى",
+    rsvpTitle: "💌 تأكيد الحضور",
+    rsvpLead: "يسعدنا معرفة إن كنتم ستشاركونا فرحتنا",
+    rsvpName: "الاسم",
+    rsvpEmail: "البريد الإلكتروني (اختياري)",
+    rsvpAttending: "هل ستحضرون؟",
+    rsvpAttendingYes: "نعم، بكل سرور!",
+    rsvpAttendingNo: "للأسف لا أستطيع",
+    rsvpGuests: "عدد الضيوف (بما فيكم)",
+    rsvpMessage: "رسالة (اختياري)",
+    rsvpSubmit: "إرسال التأكيد",
   },
   en: {
     lang: "en",
@@ -71,6 +88,16 @@ window.INVITATION_COPY = {
     footerEmoji: "💕",
     footerNamesJoin: " & ",
     photoAltPrefix: "Memory",
+    rsvpTitle: "💌 RSVP",
+    rsvpLead: "We would love to know if you can celebrate with us",
+    rsvpName: "Your name",
+    rsvpEmail: "Email (optional)",
+    rsvpAttending: "Will you attend?",
+    rsvpAttendingYes: "Yes, joyfully!",
+    rsvpAttendingNo: "Sorry, I can't make it",
+    rsvpGuests: "Number of guests (including you)",
+    rsvpMessage: "Message (optional)",
+    rsvpSubmit: "Send RSVP",
   },
 };
 
@@ -90,4 +117,11 @@ window.UI_COPY = {
   stackLabelLeft: "💕",
   stackLabelRight: "✨",
   backToTop: "⬆️ Back to top",
+  rsvpSending: "Sending your RSVP…",
+  rsvpSuccess: "Thank you! Your RSVP was received. 💕",
+  rsvpError: "Something went wrong. Please try again.",
+  rsvpNotConfigured:
+    "RSVP is not connected yet. Please contact the couple directly.",
+  dualLyricsTitleAr: "🎵 أغنيتنا",
+  dualLyricsTitleEn: "🎵 Our song",
 };

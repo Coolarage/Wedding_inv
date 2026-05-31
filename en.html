@@ -92,6 +92,50 @@
         </a>
       </section>
 
+      <section class="card rsvp-card" id="rsvp-section" aria-labelledby="rsvp-heading">
+        <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
+        <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
+        <form class="rsvp-form" id="rsvp-form">
+          <label class="rsvp-field">
+            <span class="rsvp-label" id="rsvp-label-name">Your name</span>
+            <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
+          </label>
+          <label class="rsvp-field">
+            <span class="rsvp-label" id="rsvp-label-email">Email (optional)</span>
+            <input type="email" name="email" id="rsvp-email" autocomplete="email" />
+          </label>
+          <fieldset class="rsvp-field">
+            <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
+            <div class="rsvp-radio-group">
+              <label class="rsvp-radio">
+                <input type="radio" name="attending" value="Yes" required />
+                <span id="rsvp-attending-yes">Yes, joyfully!</span>
+              </label>
+              <label class="rsvp-radio">
+                <input type="radio" name="attending" value="No" />
+                <span id="rsvp-attending-no">Sorry, I can't make it</span>
+              </label>
+            </div>
+          </fieldset>
+          <label class="rsvp-field">
+            <span class="rsvp-label" id="rsvp-label-guests">Number of guests (including you)</span>
+            <select name="guests" id="rsvp-guests">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <label class="rsvp-field">
+            <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
+            <textarea name="message" id="rsvp-message" rows="3"></textarea>
+          </label>
+          <button type="submit" class="btn btn-rsvp" id="rsvp-submit">Send RSVP</button>
+        </form>
+        <p class="rsvp-status" id="rsvp-status" hidden role="status"></p>
+      </section>
+
       <section class="card gallery-card" aria-labelledby="gallery-heading">
         <h2 id="gallery-heading" class="section-title">Our memories</h2>
         <p class="section-lead" id="gallery-lead">A little stack of our favorite moments</p>
@@ -147,5 +191,6 @@
 
     <script src="config.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/rsvp.js"></script>
   </body>
 </html>
