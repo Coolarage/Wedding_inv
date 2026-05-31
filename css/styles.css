@@ -582,22 +582,24 @@ body.is-rtl .details-row dd {
   margin-top: 0.35rem;
 }
 
-/* Mobile: two stacks, one under the other */
+/* Two stacks side by side (mobile + desktop) */
 .photo-gallery-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.75rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 0.45rem;
+  align-items: start;
 }
 
 .photo-stack-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
 }
 
 .photo-stack-side-label {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
   line-height: 1;
   filter: drop-shadow(0 0 8px rgba(255, 77, 141, 0.6));
   animation: label-pulse 2s ease-in-out infinite;
@@ -621,8 +623,8 @@ body.is-rtl .details-row dd {
 
 .photo-stack-stage {
   position: relative;
-  width: min(100%, 280px);
-  height: min(70vw, 340px);
+  width: 100%;
+  height: min(44vw, 175px);
   margin: 0 auto;
   perspective: 1600px;
   cursor: pointer;
@@ -635,12 +637,10 @@ body.is-rtl .details-row dd {
   border-radius: 20px;
 }
 
-/* Desktop: left & right columns side by side */
+/* Desktop: larger stacks with tilt */
 @media (min-width: 720px) {
   .photo-gallery-grid {
-    grid-template-columns: 1fr 1fr;
     gap: 1.25rem 1.5rem;
-    align-items: start;
   }
 
   .photo-stack-column--left {
@@ -651,8 +651,12 @@ body.is-rtl .details-row dd {
     transform: rotate(1.5deg);
   }
 
+  .photo-stack-side-label {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+  }
+
   .photo-stack-stage {
-    width: 100%;
     max-width: 260px;
     height: 360px;
   }
@@ -1132,10 +1136,6 @@ body.is-rtl .quran-text {
   .card {
     padding: 1.5rem 1.25rem;
   }
-
-  .photo-stack-stage {
-    height: 380px;
-  }
 }
 
 @media (min-width: 720px) {
@@ -1304,15 +1304,167 @@ html.scroll-story-root body.scroll-story {
 }
 
 @media (max-width: 719px) {
+  .scroll-act--party {
+    height: 100dvh;
+    height: 100svh;
+    min-height: 100svh;
+    max-height: 100svh;
+    justify-content: center;
+    padding: calc(0.65rem + var(--safe-top)) 0.65rem calc(2.75rem + var(--safe-bottom));
+    overflow: hidden;
+    scroll-snap-stop: always;
+  }
+
+  .scroll-act--party .act-inner--cards {
+    gap: 0.45rem;
+    max-height: calc(100svh - 3.25rem - var(--safe-top) - var(--safe-bottom));
+    overflow: hidden;
+  }
+
+  .scroll-act--party .card {
+    padding: 0.55rem 0.6rem;
+  }
+
+  .scroll-act--party .section-title {
+    margin-bottom: 0.35rem;
+    font-size: 0.92rem;
+  }
+
+  .scroll-act--party .section-lead {
+    margin: -0.15rem 0 0.45rem;
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .scroll-act--party .rsvp-card .section-lead {
+    display: none;
+  }
+
+  .scroll-act--party .countdown {
+    gap: 0.3rem;
+  }
+
+  .scroll-act--party .countdown-unit {
+    padding: 0.4rem 0.15rem;
+    border-radius: 10px;
+  }
+
+  .scroll-act--party .countdown-value {
+    font-size: clamp(1rem, 4.8vw, 1.25rem);
+  }
+
+  .scroll-act--party .countdown-label {
+    font-size: 0.55rem;
+  }
+
+  .scroll-act--party .details-list {
+    margin: 0 0 0.55rem;
+  }
+
+  .scroll-act--party .details-row {
+    grid-template-columns: 4.25rem 1fr;
+    gap: 0.35rem;
+    padding: 0.35rem 0;
+  }
+
+  .scroll-act--party .details-row dt {
+    font-size: 0.72rem;
+  }
+
+  .scroll-act--party .details-row dd {
+    font-size: 0.78rem;
+  }
+
+  .scroll-act--party .details-sub {
+    font-size: 0.68rem;
+  }
+
+  .scroll-act--party .btn-maps {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .scroll-act--party .rsvp-form {
+    gap: 0.45rem;
+  }
+
+  .scroll-act--party .rsvp-label {
+    font-size: 0.72rem;
+  }
+
+  .scroll-act--party .rsvp-form input[type="text"],
+  .scroll-act--party .rsvp-form textarea {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+
+  .scroll-act--party .rsvp-form textarea {
+    min-height: 2.5rem;
+  }
+
+  .scroll-act--party .rsvp-radio-group {
+    flex-direction: row;
+    gap: 0.35rem;
+  }
+
+  .scroll-act--party .rsvp-radio {
+    flex: 1;
+    justify-content: center;
+    padding: 0.35rem 0.3rem;
+    font-size: 0.72rem;
+    gap: 0.3rem;
+    border-radius: 10px;
+  }
+
+  .scroll-act--party .rsvp-radio input {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .scroll-act--party .btn-rsvp {
+    margin-top: 0;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  .scroll-act--party .rsvp-status {
+    margin-top: 0.35rem;
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .scroll-act--party .scroll-hint {
+    bottom: calc(0.45rem + var(--safe-bottom));
+    font-size: 0.68rem;
+  }
+
   .scroll-act--memories {
     height: auto;
     max-height: none;
     overflow: visible;
   }
 
+  .photo-stack-dots {
+    margin-top: 0.25rem;
+    gap: 0.2rem;
+  }
+
+  .photo-stack-dot {
+    width: 6px;
+    height: 6px;
+  }
+
   html.scroll-story-root.scroll-free-act3,
   html.scroll-story-root.scroll-free-tall {
     scroll-snap-type: none;
+  }
+}
+
+@media (max-width: 719px) and (max-height: 700px) {
+  .scroll-act--party .act-inner--cards {
+    transform: scale(0.94);
+    transform-origin: center center;
   }
 }
 
