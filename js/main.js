@@ -87,10 +87,6 @@
     set("gallery-lead", ui.galleryLead || "A little stack of our favorite moments");
     set("stack-label-left", ui.stackLabelLeft || "💕");
     set("stack-label-right", ui.stackLabelRight || "✨");
-    set(
-      "photo-stack-hint",
-      ui.stackTapHint || "Memories shuffle automatically"
-    );
     set("scroll-hint-1", ui.scrollHint1 || "Scroll to celebrate");
     set("scroll-hint-2", ui.scrollHint2 || "Our memories await");
     set("back-to-top", ui.backToTop || "Back to top");
