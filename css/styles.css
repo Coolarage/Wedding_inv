@@ -853,15 +853,6 @@ body.is-rtl .details-row dd {
   }
 }
 
-.photo-stack-hint {
-  margin: 1.1rem 0 0;
-  text-align: center;
-  font-size: 0.78rem;
-  color: var(--color-muted);
-  font-weight: 600;
-  opacity: 0.9;
-}
-
 /* Dual lyrics — special invites */
 .dual-lyrics {
   display: grid;

@@ -115,7 +115,6 @@ window.UI_COPY = {
   openMaps: "🗺️ Open location in Maps",
   galleryTitle: "💖 Our memories",
   galleryLead: "A little stack of our favorite moments",
-  stackTapHint: "✨ Memories shuffle automatically — tap any photo to skip ahead",
   stackLabelLeft: "💕",
   stackLabelRight: "✨",
   backToTop: "⬆️ Back to top",
