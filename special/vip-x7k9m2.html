@@ -1,40 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-invite-lang="ar">
+<!--
+  SPECIAL INVITE TEMPLATE — Mohab & Hams
+  ======================================
+  1. Duplicate this file with a unique secret name, e.g. special/a8f3-khaled.html
+  2. Set data-guest-name below (shown in the eyebrow)
+  3. Optionally edit data-guest-message for a personal line
+  4. Share ONLY that private URL — do not link it from the public site
+  5. English layout + both songs side by side (default for special guests)
+
+  Example URL after deploy:
+  https://project-2zfzh.vercel.app/special/a8f3-khaled.html
+-->
+<html
+  lang="en"
+  dir="ltr"
+  data-invite-lang="en"
+  data-invite-type="special"
+  data-guest-name="Our dear VIP guest"
+  data-guest-message=""
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#c2185b" />
-    <meta name="description" content="دعوة زفاف مهاب و همس — ٣٠ سبتمبر ٢٠٢٦" id="meta-description" />
-    <title>مهاب و همس — دعوة الزفاف</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+      name="description"
+      content="Private wedding invitation for Mohab & Hams — 30 September 2026"
+      id="meta-description"
+    />
+    <title>Mohab & Hams — Special Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
   </head>
-  <body>
+  <body class="is-ltr is-special-invite">
     <div class="page-bg" aria-hidden="true"></div>
     <div class="sparkles" aria-hidden="true">
       <span>✨</span><span>💫</span><span>🌸</span><span>✨</span><span>💍</span>
     </div>
 
     <header class="hero" id="top">
-      <p class="hero-eyebrow" id="hero-eyebrow">💌 ندعوكم لمشاركتنا فرحتنا</p>
+      <p class="hero-eyebrow" id="hero-eyebrow">💌 We invite you to share our joy</p>
       <h1 class="hero-names">
-        <span class="name name-groom" id="groom-name">مهاب</span>
+        <span class="name name-groom" id="groom-name">Mohab</span>
         <span class="ampersand" aria-hidden="true">&</span>
-        <span class="name name-bride" id="bride-name">همس</span>
+        <span class="name name-bride" id="bride-name">Hams</span>
       </h1>
-      <p class="hero-tagline" id="hero-tagline" hidden></p>
-      <blockquote class="hero-lyrics" id="hero-lyrics" aria-label="كلمات الأغنية">
+      <p class="hero-tagline" id="hero-tagline">✨ Together we begin a new chapter</p>
+
+      <!-- Single-column lyrics hidden on special pages -->
+      <blockquote class="hero-lyrics" id="hero-lyrics" hidden aria-hidden="true">
         <span class="hero-lyrics-badge" aria-hidden="true">🎵</span>
         <div class="hero-lyrics-text" id="hero-lyrics-text"></div>
       </blockquote>
+
+      <!-- Both songs side by side -->
+      <div class="dual-lyrics" id="dual-lyrics" aria-label="Our songs">
+        <blockquote class="lyrics-panel lyrics-panel-ar" id="lyrics-panel-ar">
+          <h3 class="lyrics-panel-title" id="dual-lyrics-title-ar">🎵 أغنيتنا</h3>
+          <div class="lyrics-panel-text" id="lyrics-ar-text"></div>
+        </blockquote>
+        <blockquote class="lyrics-panel lyrics-panel-en" id="lyrics-panel-en">
+          <h3 class="lyrics-panel-title" id="dual-lyrics-title-en">🎵 Our song</h3>
+          <div class="lyrics-panel-text" id="lyrics-en-text"></div>
+        </blockquote>
+      </div>
+
       <div class="hero-date-block">
-        <time class="hero-date" id="wedding-date" datetime="2026-09-30" lang="ar">
-          الأربعاء · ٣٠ سبتمبر ٢٠٢٦
+        <time class="hero-date" id="wedding-date" datetime="2026-09-30" lang="en">
+          Wednesday · 30 September 2026
         </time>
       </div>
     </header>
@@ -67,7 +106,7 @@
         <dl class="details-list">
           <div class="details-row">
             <dt data-ui="labelDate">Date</dt>
-            <dd id="detail-date" lang="ar">٣٠ / ٩ / ٢٠٢٦</dd>
+            <dd id="detail-date" lang="en">30 / 9 / 2026</dd>
           </div>
           <div class="details-row">
             <dt data-ui="labelVenue">Venue</dt>
@@ -89,32 +128,32 @@
       </section>
 
       <section class="card rsvp-card" id="rsvp-section" aria-labelledby="rsvp-heading">
-        <h2 id="rsvp-heading" class="section-title">💌 تأكيد الحضور</h2>
-        <p class="section-lead" id="rsvp-lead">يسعدنا معرفة إن كنتم ستشاركونا فرحتنا</p>
+        <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
+        <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
         <form class="rsvp-form" id="rsvp-form">
           <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-name">الاسم</span>
+            <span class="rsvp-label" id="rsvp-label-name">Your name</span>
             <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
           </label>
           <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-email">البريد الإلكتروني (اختياري)</span>
+            <span class="rsvp-label" id="rsvp-label-email">Email (optional)</span>
             <input type="email" name="email" id="rsvp-email" autocomplete="email" />
           </label>
           <fieldset class="rsvp-field">
-            <legend class="rsvp-label" id="rsvp-label-attending">هل ستحضرون؟</legend>
+            <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
             <div class="rsvp-radio-group">
               <label class="rsvp-radio">
                 <input type="radio" name="attending" value="Yes" required />
-                <span id="rsvp-attending-yes">نعم، بكل سرور!</span>
+                <span id="rsvp-attending-yes">Yes, joyfully!</span>
               </label>
               <label class="rsvp-radio">
                 <input type="radio" name="attending" value="No" />
-                <span id="rsvp-attending-no">للأسف لا أستطيع</span>
+                <span id="rsvp-attending-no">Sorry, I can't make it</span>
               </label>
             </div>
           </fieldset>
           <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-guests">عدد الضيوف (بما فيكم)</span>
+            <span class="rsvp-label" id="rsvp-label-guests">Number of guests (including you)</span>
             <select name="guests" id="rsvp-guests">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -124,10 +163,10 @@
             </select>
           </label>
           <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-message">رسالة (اختياري)</span>
+            <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
             <textarea name="message" id="rsvp-message" rows="3"></textarea>
           </label>
-          <button type="submit" class="btn btn-rsvp" id="rsvp-submit">إرسال التأكيد</button>
+          <button type="submit" class="btn btn-rsvp" id="rsvp-submit">Send RSVP</button>
         </form>
         <p class="rsvp-status" id="rsvp-status" hidden role="status"></p>
       </section>
@@ -139,26 +178,12 @@
           <div class="photo-gallery-grid">
             <div class="photo-stack-column photo-stack-column--left">
               <p class="photo-stack-side-label" id="stack-label-left" aria-hidden="true">✦</p>
-              <div
-                class="photo-stack-stage"
-                data-stack-stage="left"
-                role="group"
-                aria-roledescription="carousel"
-                aria-label="Memories — set one"
-                tabindex="0"
-              ></div>
+              <div class="photo-stack-stage" data-stack-stage="left" tabindex="0"></div>
               <div class="photo-stack-dots" data-stack-dots="left" role="tablist"></div>
             </div>
             <div class="photo-stack-column photo-stack-column--right">
               <p class="photo-stack-side-label" id="stack-label-right" aria-hidden="true">✦</p>
-              <div
-                class="photo-stack-stage"
-                data-stack-stage="right"
-                role="group"
-                aria-roledescription="carousel"
-                aria-label="Memories — set two"
-                tabindex="0"
-              ></div>
+              <div class="photo-stack-stage" data-stack-stage="right" tabindex="0"></div>
               <div class="photo-stack-dots" data-stack-dots="right" role="tablist"></div>
             </div>
           </div>
@@ -170,23 +195,19 @@
     <footer class="site-footer">
       <p class="footer-awaiting">
         <span class="footer-emoji" id="footer-emoji" aria-hidden="true">💕</span>
-        <span id="footer-line">🎉 بانتظاركم بفرح</span>
+        <span id="footer-line">🎉 We cannot wait to celebrate with you</span>
         <span class="footer-dot" aria-hidden="true"> · </span>
-        <span id="footer-names">مهاب و همس</span>
+        <span id="footer-names">Mohab & Hams</span>
       </p>
-      <blockquote class="quran-verse" id="quran-verse" cite="https://quran.com/ar/30/21">
-        <p
-          class="quran-text"
-          id="quran-text"
-          lang="ar"
-        >وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-        <cite class="quran-ref" id="quran-ref">📖 الروم · ٣٠:٢١</cite>
+      <blockquote class="quran-verse" id="quran-verse">
+        <p class="quran-text" id="quran-text" lang="ar"></p>
+        <cite class="quran-ref" id="quran-ref"></cite>
       </blockquote>
       <a class="back-top" href="#top" id="back-to-top">Back to top</a>
     </footer>
 
-    <script src="config.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/rsvp.js"></script>
+    <script src="../config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/rsvp.js"></script>
   </body>
 </html>

@@ -5,7 +5,13 @@
 
   const pageLang =
     document.documentElement.getAttribute("data-invite-lang") || "ar";
+  const isSpecial =
+    document.documentElement.getAttribute("data-invite-type") === "special";
   const copy = inviteCopy[pageLang] || inviteCopy.ar;
+  const enCopy = inviteCopy.en || {};
+  const arCopy = inviteCopy.ar || {};
+
+  const assetRoot = isSpecial ? ".." : ".";
 
   const weddingDate = new Date(cfg.date || "2026-09-30T18:00:00+03:00");
   const STACK_VISIBLE = 3;
@@ -23,11 +29,23 @@
   }
 
   function photoUrl(filename) {
-    return `assets/photos/${encodeURIComponent(filename)}`;
+    return `${assetRoot}/assets/photos/${encodeURIComponent(filename)}`;
+  }
+
+  function fillLyricsContainer(container, lines) {
+    if (!container) return;
+    container.replaceChildren(
+      ...(lines || []).map((line) => {
+        const span = document.createElement("span");
+        span.className = "lyrics-line";
+        span.textContent = line;
+        return span;
+      })
+    );
   }
 
   function getNames() {
-    if (pageLang === "en") {
+    if (pageLang === "en" || isSpecial) {
       const groom = cfg.groomEn || "Mohab";
       const bride = cfg.brideEn || "Hams";
       return {
@@ -69,7 +87,77 @@
     set("gallery-lead", ui.galleryLead || "A little stack of our favorite moments");
     set("stack-label-left", ui.stackLabelLeft || "💕");
     set("stack-label-right", ui.stackLabelRight || "✨");
+    set(
+      "photo-stack-hint",
+      ui.stackTapHint || "Memories shuffle automatically"
+    );
     set("back-to-top", ui.backToTop || "Back to top");
+    applyRsvpLabels();
+  }
+
+  function applyRsvpLabels() {
+    const set = (id, text) => {
+      const el = document.getElementById(id);
+      if (el && text) el.textContent = text;
+    };
+    set("rsvp-heading", copy.rsvpTitle);
+    set("rsvp-lead", copy.rsvpLead);
+    set("rsvp-label-name", copy.rsvpName);
+    set("rsvp-label-email", copy.rsvpEmail);
+    set("rsvp-label-attending", copy.rsvpAttending);
+    set("rsvp-attending-yes", copy.rsvpAttendingYes);
+    set("rsvp-attending-no", copy.rsvpAttendingNo);
+    set("rsvp-label-guests", copy.rsvpGuests);
+    set("rsvp-label-message", copy.rsvpMessage);
+    set("rsvp-submit", copy.rsvpSubmit);
+  }
+
+  function applySpecialPage() {
+    document.body.classList.add("is-special-invite");
+
+    const guestName =
+      document.documentElement.getAttribute("data-guest-name") || "";
+    const guestMessage =
+      document.documentElement.getAttribute("data-guest-message") || "";
+    const eyebrow = document.getElementById("hero-eyebrow");
+
+    if (eyebrow) {
+      if (guestMessage) {
+        eyebrow.textContent = guestMessage;
+      } else if (guestName) {
+        eyebrow.textContent = `💌 ${guestName}, you're invited to share our joy`;
+      } else {
+        eyebrow.textContent = enCopy.eyebrow || copy.eyebrow;
+      }
+    }
+
+    const taglineEl = document.getElementById("hero-tagline");
+    if (taglineEl) {
+      taglineEl.textContent = enCopy.tagline || copy.tagline || "";
+      taglineEl.hidden = false;
+    }
+
+    const singleLyrics = document.getElementById("hero-lyrics");
+    if (singleLyrics) singleLyrics.hidden = true;
+
+    set("dual-lyrics-title-ar", ui.dualLyricsTitleAr || "🎵 أغنيتنا");
+    set("dual-lyrics-title-en", ui.dualLyricsTitleEn || "🎵 Our song");
+    fillLyricsContainer(
+      document.getElementById("lyrics-ar-text"),
+      arCopy.lyricsLines
+    );
+    fillLyricsContainer(
+      document.getElementById("lyrics-en-text"),
+      enCopy.lyricsLines
+    );
+
+    document.getElementById("footer-line").textContent =
+      enCopy.footerLine || copy.footerLine;
+  }
+
+  function set(id, text) {
+    const el = document.getElementById(id);
+    if (el && text !== undefined) el.textContent = text;
   }
 
   function applyPage() {
@@ -78,65 +166,66 @@
     document.body.classList.toggle("is-rtl", copy.dir === "rtl");
     document.body.classList.toggle("is-ltr", copy.dir === "ltr");
 
-    document.title = copy.documentTitle;
+    document.title = isSpecial
+      ? `${cfg.groomEn || "Mohab"} & ${cfg.brideEn || "Hams"} — Special Invitation`
+      : copy.documentTitle;
     const meta = document.getElementById("meta-description");
     if (meta) meta.content = copy.metaDescription;
 
-    document.getElementById("hero-eyebrow").textContent = copy.eyebrow;
+    if (isSpecial) {
+      applySpecialPage();
+    } else {
+      document.getElementById("hero-eyebrow").textContent = copy.eyebrow;
 
-    const taglineEl = document.getElementById("hero-tagline");
-    if (taglineEl) {
-      if (copy.tagline) {
-        taglineEl.textContent = copy.tagline;
-        taglineEl.hidden = false;
-      } else {
-        taglineEl.textContent = "";
-        taglineEl.hidden = true;
+      const taglineEl = document.getElementById("hero-tagline");
+      if (taglineEl) {
+        if (copy.tagline) {
+          taglineEl.textContent = copy.tagline;
+          taglineEl.hidden = false;
+        } else {
+          taglineEl.textContent = "";
+          taglineEl.hidden = true;
+        }
       }
-    }
 
-    const lyricsBlock = document.getElementById("hero-lyrics");
-    const lyricsText = document.getElementById("hero-lyrics-text");
-    const lines = Array.isArray(copy.lyricsLines) ? copy.lyricsLines : [];
-    if (lyricsBlock && lyricsText) {
-      if (lines.length > 0) {
-        lyricsText.replaceChildren(
-          ...lines.map((line) => {
-            const span = document.createElement("span");
-            span.className = "lyrics-line";
-            span.textContent = line;
-            return span;
-          })
-        );
-        lyricsBlock.hidden = false;
-      } else {
-        lyricsText.replaceChildren();
-        lyricsBlock.hidden = true;
+      const lyricsBlock = document.getElementById("hero-lyrics");
+      const lyricsText = document.getElementById("hero-lyrics-text");
+      const lines = Array.isArray(copy.lyricsLines) ? copy.lyricsLines : [];
+      if (lyricsBlock && lyricsText) {
+        if (lines.length > 0) {
+          fillLyricsContainer(lyricsText, lines);
+          lyricsBlock.hidden = false;
+        } else {
+          lyricsText.replaceChildren();
+          lyricsBlock.hidden = true;
+        }
       }
-    }
 
-    document.getElementById("footer-line").textContent = copy.footerLine;
+      document.getElementById("footer-line").textContent = copy.footerLine;
+    }
 
     const footerEmoji = document.getElementById("footer-emoji");
     if (footerEmoji) footerEmoji.textContent = copy.footerEmoji || "💕";
 
     const eventEn = cfg.eventEn || {};
     const eventAr = cfg.eventAr || {};
-    const dateLine =
-      pageLang === "ar"
+    const dateLine = isSpecial
+      ? eventEn.dateLine || "Wednesday · 30 September 2026"
+      : pageLang === "ar"
         ? eventAr.dateLine || "الأربعاء · ٣٠ سبتمبر ٢٠٢٦"
         : eventEn.dateLine || "Wednesday · 30 September 2026";
-    const dateDetail =
-      pageLang === "ar"
+    const dateDetail = isSpecial
+      ? eventEn.dateDetail || "30 / 9 / 2026"
+      : pageLang === "ar"
         ? eventAr.dateDetail || "٣٠ / ٩ / ٢٠٢٦"
         : eventEn.dateDetail || "30 / 9 / 2026";
 
     const weddingDateEl = document.getElementById("wedding-date");
     weddingDateEl.textContent = dateLine;
-    weddingDateEl.lang = pageLang === "ar" ? "ar" : "en";
+    weddingDateEl.lang = isSpecial || pageLang === "en" ? "en" : "ar";
     document.getElementById("detail-date").textContent = dateDetail;
     document.getElementById("detail-date").lang =
-      pageLang === "ar" ? "ar" : "en";
+      isSpecial || pageLang === "en" ? "en" : "ar";
 
     const names = getNames();
     document.getElementById("groom-name").textContent = names.heroGroom;
