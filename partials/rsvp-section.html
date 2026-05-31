@@ -1,15 +1,11 @@
-<!-- Copy this RSVP block into invitation pages (before gallery). IDs must match. -->
-<section class="card rsvp-card" id="rsvp-section" aria-labelledby="rsvp-heading">
+<!-- RSVP block — lives in Act 2 on invitation pages. IDs must match. -->
+<section class="card rsvp-card anim-item" style="--i: 7" id="rsvp-section" aria-labelledby="rsvp-heading">
   <h2 id="rsvp-heading" class="section-title">RSVP</h2>
   <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
   <form class="rsvp-form" id="rsvp-form">
     <label class="rsvp-field">
       <span class="rsvp-label" id="rsvp-label-name">Your name</span>
       <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
-    </label>
-    <label class="rsvp-field">
-      <span class="rsvp-label" id="rsvp-label-email">Email (optional)</span>
-      <input type="email" name="email" id="rsvp-email" autocomplete="email" />
     </label>
     <fieldset class="rsvp-field">
       <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
@@ -24,16 +20,19 @@
         </label>
       </div>
     </fieldset>
-    <label class="rsvp-field">
-      <span class="rsvp-label" id="rsvp-label-guests">Number of guests (including you)</span>
-      <select name="guests" id="rsvp-guests">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </label>
+    <fieldset class="rsvp-field">
+      <legend class="rsvp-label" id="rsvp-label-plus-one">Will you bring a +1?</legend>
+      <div class="rsvp-radio-group">
+        <label class="rsvp-radio">
+          <input type="radio" name="plusOne" value="Yes" />
+          <span id="rsvp-plus-one-yes">Yes</span>
+        </label>
+        <label class="rsvp-radio">
+          <input type="radio" name="plusOne" value="No" />
+          <span id="rsvp-plus-one-no">No</span>
+        </label>
+      </div>
+    </fieldset>
     <label class="rsvp-field">
       <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
       <textarea name="message" id="rsvp-message" rows="3"></textarea>

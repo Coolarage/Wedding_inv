@@ -8,9 +8,9 @@ The site sends RSVPs to a **Google Sheet** using a free Google Apps Script web a
 2. Name it e.g. `Mohab & Hams RSVP`
 3. In **row 1**, add these headers:
 
-| A | B | C | D | E | F | G |
-|---|---|---|---|---|---|---|
-| Timestamp | Name | Email | Attending | Guests | Message | Page |
+| A | B | C | D | E | F |
+|---|---|---|---|---|---|
+| Timestamp | Name | Attending | Plus One | Message | Page |
 
 ## Step 2 — Add the script
 
@@ -50,4 +50,4 @@ Commit, push to GitHub, wait for Vercel to redeploy (~1 min).
 
 - **No rows appearing:** Redeploy the script as **New version**, ensure access is **Anyone**
 - **Form says “not connected”:** `scriptUrl` is empty in `config.js` on the deployed site
-- **Duplicate submissions:** Normal if guests submit twice; filter by email in the sheet
+- **Duplicate submissions:** Normal if guests submit twice; filter by name in the sheet
