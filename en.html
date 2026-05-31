@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-invite-lang="en">
+<html lang="en" dir="ltr" data-invite-lang="en" class="scroll-story-root">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -24,173 +24,191 @@
       <span>✨</span><span>💫</span><span>🌸</span><span>✨</span><span>💍</span>
     </div>
 
-    <header class="hero" id="top">
-      <p class="hero-eyebrow" id="hero-eyebrow">💌 We invite you to share our joy</p>
-      <h1 class="hero-names">
-        <span class="name name-groom" id="groom-name">Mohab</span>
-        <span class="ampersand" aria-hidden="true">&</span>
-        <span class="name name-bride" id="bride-name">Hams</span>
-      </h1>
-      <p class="hero-tagline" id="hero-tagline">✨ Together we begin a new chapter</p>
-      <blockquote class="hero-lyrics" id="hero-lyrics" aria-label="Song lyrics">
-        <span class="hero-lyrics-badge" aria-hidden="true">🎵</span>
-        <div class="hero-lyrics-text" id="hero-lyrics-text"></div>
-      </blockquote>
-      <div class="hero-date-block">
-        <time class="hero-date" id="wedding-date" datetime="2026-09-30" lang="en">
-          Wednesday · 30 September 2026
-        </time>
+    <!-- ACT 1 · The invitation -->
+    <section class="scroll-act scroll-act--invite" id="act-1" data-act="1" aria-label="The invitation">
+      <div class="act-burst" aria-hidden="true"></div>
+      <div class="act-deco act-deco--rings" aria-hidden="true">
+        <span class="ring ring-1">💍</span>
+        <span class="ring ring-2">💕</span>
       </div>
-    </header>
 
-    <main>
-      <section class="card countdown-card" aria-labelledby="countdown-heading">
-        <h2 id="countdown-heading" class="section-title">Countdown</h2>
-        <div class="countdown countdown-ltr" id="countdown" role="timer" aria-live="polite">
-          <div class="countdown-unit">
-            <span class="countdown-value" id="cd-days">—</span>
-            <span class="countdown-label" data-ui="days">Days</span>
+      <div class="act-inner">
+        <header class="hero" id="top">
+          <p class="hero-eyebrow anim-item" id="hero-eyebrow" style="--i: 0">💌 We invite you to share our joy</p>
+          <h1 class="hero-names anim-item" style="--i: 1">
+            <span class="name name-groom" id="groom-name">Mohab</span>
+            <span class="ampersand" aria-hidden="true">&</span>
+            <span class="name name-bride" id="bride-name">Hams</span>
+          </h1>
+          <p class="hero-tagline anim-item" id="hero-tagline" style="--i: 2">✨ Together we begin a new chapter</p>
+          <blockquote class="hero-lyrics anim-item" id="hero-lyrics" aria-label="Song lyrics" style="--i: 3">
+            <span class="hero-lyrics-badge" aria-hidden="true">🎵</span>
+            <div class="hero-lyrics-text" id="hero-lyrics-text"></div>
+          </blockquote>
+          <div class="hero-date-block anim-item" style="--i: 4">
+            <time class="hero-date" id="wedding-date" datetime="2026-09-30" lang="en">
+              Wednesday · 30 September 2026
+            </time>
           </div>
-          <div class="countdown-unit">
-            <span class="countdown-value" id="cd-hours">—</span>
-            <span class="countdown-label" data-ui="hours">Hours</span>
-          </div>
-          <div class="countdown-unit">
-            <span class="countdown-value" id="cd-mins">—</span>
-            <span class="countdown-label" data-ui="minutes">Minutes</span>
-          </div>
-          <div class="countdown-unit">
-            <span class="countdown-value" id="cd-secs">—</span>
-            <span class="countdown-label" data-ui="seconds">Seconds</span>
-          </div>
-        </div>
-      </section>
+        </header>
+      </div>
 
-      <section class="card details-card" aria-labelledby="details-heading">
-        <h2 id="details-heading" class="section-title">Celebration details</h2>
-        <dl class="details-list">
-          <div class="details-row">
-            <dt data-ui="labelDate">Date</dt>
-            <dd id="detail-date" lang="en">30 / 9 / 2026</dd>
-          </div>
-          <div class="details-row">
-            <dt data-ui="labelVenue">Venue</dt>
-            <dd>
-              <span id="venue-name" lang="en">La Terrace, JW Marriott</span>
-              <span class="details-sub" id="venue-area" lang="en">Fifth Settlement, Cairo</span>
-            </dd>
-          </div>
-        </dl>
-        <a
-          class="btn btn-maps"
-          id="maps-link"
-          href="https://www.google.com/maps/place/Club+House/@30.07078,31.4359958,18z/data=!4m6!3m5!1s0x145817197b9f1de9:0x1bf309708d796b1f!8m2!3d30.0699596!4d31.4344754!16s%2Fg%2F11vdbcj_fv?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open location in Maps
-        </a>
-      </section>
+      <a class="scroll-hint" href="#act-2">
+        <span class="scroll-hint-text" id="scroll-hint-1">Scroll to celebrate</span>
+        <span class="scroll-hint-icon" aria-hidden="true">↓</span>
+      </a>
+    </section>
 
-      <section class="card rsvp-card" id="rsvp-section" aria-labelledby="rsvp-heading">
-        <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
-        <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
-        <form class="rsvp-form" id="rsvp-form">
-          <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-name">Your name</span>
-            <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
-          </label>
-          <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-email">Email (optional)</span>
-            <input type="email" name="email" id="rsvp-email" autocomplete="email" />
-          </label>
-          <fieldset class="rsvp-field">
-            <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
-            <div class="rsvp-radio-group">
-              <label class="rsvp-radio">
-                <input type="radio" name="attending" value="Yes" required />
-                <span id="rsvp-attending-yes">Yes, joyfully!</span>
-              </label>
-              <label class="rsvp-radio">
-                <input type="radio" name="attending" value="No" />
-                <span id="rsvp-attending-no">Sorry, I can't make it</span>
-              </label>
+    <!-- ACT 2 · The celebration & RSVP -->
+    <section class="scroll-act scroll-act--party" id="act-2" data-act="2" aria-label="Celebration details and RSVP">
+      <div class="act-burst" aria-hidden="true"></div>
+      <div class="act-deco act-deco--confetti" aria-hidden="true">🎊 🥂 🎉</div>
+
+      <div class="act-inner act-inner--cards">
+        <section class="card countdown-card anim-item" style="--i: 0" aria-labelledby="countdown-heading">
+          <h2 id="countdown-heading" class="section-title">Countdown</h2>
+          <div class="countdown countdown-ltr" id="countdown" role="timer" aria-live="polite">
+            <div class="countdown-unit anim-item" style="--i: 1">
+              <span class="countdown-value" id="cd-days">—</span>
+              <span class="countdown-label" data-ui="days">Days</span>
             </div>
-          </fieldset>
-          <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-guests">Number of guests (including you)</span>
-            <select name="guests" id="rsvp-guests">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </label>
-          <label class="rsvp-field">
-            <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
-            <textarea name="message" id="rsvp-message" rows="3"></textarea>
-          </label>
-          <button type="submit" class="btn btn-rsvp" id="rsvp-submit">Send RSVP</button>
-        </form>
-        <p class="rsvp-status" id="rsvp-status" hidden role="status"></p>
-      </section>
-
-      <section class="card gallery-card" aria-labelledby="gallery-heading">
-        <h2 id="gallery-heading" class="section-title">Our memories</h2>
-        <p class="section-lead" id="gallery-lead">A little stack of our favorite moments</p>
-        <div class="photo-gallery" id="photo-gallery">
-          <div class="photo-gallery-grid">
-            <div class="photo-stack-column photo-stack-column--left">
-              <p class="photo-stack-side-label" id="stack-label-left" aria-hidden="true">✦</p>
-              <div
-                class="photo-stack-stage"
-                data-stack-stage="left"
-                role="group"
-                aria-roledescription="carousel"
-                aria-label="Memories — set one"
-                tabindex="0"
-              ></div>
-              <div class="photo-stack-dots" data-stack-dots="left" role="tablist"></div>
+            <div class="countdown-unit anim-item" style="--i: 2">
+              <span class="countdown-value" id="cd-hours">—</span>
+              <span class="countdown-label" data-ui="hours">Hours</span>
             </div>
-            <div class="photo-stack-column photo-stack-column--right">
-              <p class="photo-stack-side-label" id="stack-label-right" aria-hidden="true">✦</p>
-              <div
-                class="photo-stack-stage"
-                data-stack-stage="right"
-                role="group"
-                aria-roledescription="carousel"
-                aria-label="Memories — set two"
-                tabindex="0"
-              ></div>
-              <div class="photo-stack-dots" data-stack-dots="right" role="tablist"></div>
+            <div class="countdown-unit anim-item" style="--i: 3">
+              <span class="countdown-value" id="cd-mins">—</span>
+              <span class="countdown-label" data-ui="minutes">Minutes</span>
+            </div>
+            <div class="countdown-unit anim-item" style="--i: 4">
+              <span class="countdown-value" id="cd-secs">—</span>
+              <span class="countdown-label" data-ui="seconds">Seconds</span>
             </div>
           </div>
-          <p class="photo-stack-hint" id="photo-stack-hint"></p>
-        </div>
-      </section>
-    </main>
+        </section>
 
-    <footer class="site-footer">
-      <p class="footer-awaiting">
-        <span class="footer-emoji" id="footer-emoji" aria-hidden="true">💕</span>
-        <span id="footer-line">🎉 We cannot wait to celebrate with you</span>
-        <span class="footer-dot" aria-hidden="true"> · </span>
-        <span id="footer-names">Mohab & Hams</span>
-      </p>
-      <blockquote class="quran-verse" id="quran-verse" cite="https://quran.com/ar/30/21">
-        <p
-          class="quran-text"
-          id="quran-text"
-          lang="ar"
-        >وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-        <cite class="quran-ref" id="quran-ref">📖 الروم · ٣٠:٢١</cite>
-      </blockquote>
-      <a class="back-top" href="#top" id="back-to-top">Back to top</a>
-    </footer>
+        <section class="card details-card anim-item" style="--i: 5" aria-labelledby="details-heading">
+          <h2 id="details-heading" class="section-title">Celebration details</h2>
+          <dl class="details-list">
+            <div class="details-row">
+              <dt data-ui="labelDate">Date</dt>
+              <dd id="detail-date" lang="en">30 / 9 / 2026</dd>
+            </div>
+            <div class="details-row">
+              <dt data-ui="labelVenue">Venue</dt>
+              <dd>
+                <span id="venue-name" lang="en">La Terrace, JW Marriott</span>
+                <span class="details-sub" id="venue-area" lang="en">Fifth Settlement, Cairo</span>
+              </dd>
+            </div>
+          </dl>
+          <a
+            class="btn btn-maps anim-item"
+            style="--i: 6"
+            id="maps-link"
+            href="https://www.google.com/maps/place/Club+House/@30.07078,31.4359958,18z/data=!4m6!3m5!1s0x145817197b9f1de9:0x1bf309708d796b1f!8m2!3d30.0699596!4d31.4344754!16s%2Fg%2F11vdbcj_fv?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open location in Maps
+          </a>
+        </section>
+
+        <section class="card rsvp-card anim-item" style="--i: 7" id="rsvp-section" aria-labelledby="rsvp-heading">
+          <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
+          <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
+          <form class="rsvp-form" id="rsvp-form">
+            <label class="rsvp-field">
+              <span class="rsvp-label" id="rsvp-label-name">Your name</span>
+              <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
+            </label>
+            <fieldset class="rsvp-field">
+              <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
+              <div class="rsvp-radio-group">
+                <label class="rsvp-radio">
+                  <input type="radio" name="attending" value="Yes" required />
+                  <span id="rsvp-attending-yes">Yes, joyfully!</span>
+                </label>
+                <label class="rsvp-radio">
+                  <input type="radio" name="attending" value="No" />
+                  <span id="rsvp-attending-no">Sorry, I can't make it</span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset class="rsvp-field">
+              <legend class="rsvp-label" id="rsvp-label-plus-one">Will you bring a +1?</legend>
+              <div class="rsvp-radio-group">
+                <label class="rsvp-radio">
+                  <input type="radio" name="plusOne" value="Yes" />
+                  <span id="rsvp-plus-one-yes">Yes</span>
+                </label>
+                <label class="rsvp-radio">
+                  <input type="radio" name="plusOne" value="No" />
+                  <span id="rsvp-plus-one-no">No</span>
+                </label>
+              </div>
+            </fieldset>
+            <label class="rsvp-field">
+              <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
+              <textarea name="message" id="rsvp-message" rows="3"></textarea>
+            </label>
+            <button type="submit" class="btn btn-rsvp" id="rsvp-submit">Send RSVP</button>
+          </form>
+          <p class="rsvp-status" id="rsvp-status" hidden role="status"></p>
+        </section>
+      </div>
+
+      <a class="scroll-hint" href="#act-3">
+        <span class="scroll-hint-text" id="scroll-hint-2">Our memories await</span>
+        <span class="scroll-hint-icon" aria-hidden="true">↓</span>
+      </a>
+    </section>
+
+    <!-- ACT 3 · Memories -->
+    <section class="scroll-act scroll-act--memories" id="act-3" data-act="3" aria-label="Memories">
+      <div class="act-burst" aria-hidden="true"></div>
+      <div class="act-deco act-deco--hearts" aria-hidden="true">💖 💕 💖</div>
+
+      <div class="act-inner act-inner--tall">
+        <section class="card gallery-card anim-item" style="--i: 0" aria-labelledby="gallery-heading">
+          <h2 id="gallery-heading" class="section-title">Our memories</h2>
+          <p class="section-lead" id="gallery-lead">A little stack of our favorite moments</p>
+          <div class="photo-gallery" id="photo-gallery">
+            <div class="photo-gallery-grid">
+              <div class="photo-stack-column photo-stack-column--left">
+                <p class="photo-stack-side-label" id="stack-label-left" aria-hidden="true">✦</p>
+                <div class="photo-stack-stage" data-stack-stage="left" tabindex="0"></div>
+                <div class="photo-stack-dots" data-stack-dots="left" role="tablist"></div>
+              </div>
+              <div class="photo-stack-column photo-stack-column--right">
+                <p class="photo-stack-side-label" id="stack-label-right" aria-hidden="true">✦</p>
+                <div class="photo-stack-stage" data-stack-stage="right" tabindex="0"></div>
+                <div class="photo-stack-dots" data-stack-dots="right" role="tablist"></div>
+              </div>
+            </div>
+            <p class="photo-stack-hint" id="photo-stack-hint"></p>
+          </div>
+        </section>
+
+        <footer class="site-footer anim-item" style="--i: 1">
+          <p class="footer-awaiting">
+            <span class="footer-emoji" id="footer-emoji" aria-hidden="true">💕</span>
+            <span id="footer-line">🎉 We cannot wait to celebrate with you</span>
+            <span class="footer-dot" aria-hidden="true"> · </span>
+            <span id="footer-names">Mohab & Hams</span>
+          </p>
+          <blockquote class="quran-verse" id="quran-verse" cite="https://quran.com/ar/30/21">
+            <p class="quran-text" id="quran-text" lang="ar"></p>
+            <cite class="quran-ref" id="quran-ref"></cite>
+          </blockquote>
+          <a class="back-top" href="#act-1" id="back-to-top">Back to top</a>
+        </footer>
+      </div>
+    </section>
 
     <script src="config.js"></script>
     <script src="js/main.js"></script>
     <script src="js/rsvp.js"></script>
+    <script src="js/scroll-acts.js"></script>
   </body>
 </html>

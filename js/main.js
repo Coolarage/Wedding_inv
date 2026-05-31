@@ -91,6 +91,8 @@
       "photo-stack-hint",
       ui.stackTapHint || "Memories shuffle automatically"
     );
+    set("scroll-hint-1", ui.scrollHint1 || "Scroll to celebrate");
+    set("scroll-hint-2", ui.scrollHint2 || "Our memories await");
     set("back-to-top", ui.backToTop || "Back to top");
     applyRsvpLabels();
   }
@@ -103,11 +105,12 @@
     set("rsvp-heading", copy.rsvpTitle);
     set("rsvp-lead", copy.rsvpLead);
     set("rsvp-label-name", copy.rsvpName);
-    set("rsvp-label-email", copy.rsvpEmail);
     set("rsvp-label-attending", copy.rsvpAttending);
     set("rsvp-attending-yes", copy.rsvpAttendingYes);
     set("rsvp-attending-no", copy.rsvpAttendingNo);
-    set("rsvp-label-guests", copy.rsvpGuests);
+    set("rsvp-label-plus-one", copy.rsvpPlusOne);
+    set("rsvp-plus-one-yes", copy.rsvpPlusOneYes);
+    set("rsvp-plus-one-no", copy.rsvpPlusOneNo);
     set("rsvp-label-message", copy.rsvpMessage);
     set("rsvp-submit", copy.rsvpSubmit);
   }
