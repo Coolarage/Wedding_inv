@@ -555,6 +555,39 @@ body.is-rtl .details-row dd {
   transform: scale(0.97);
 }
 
+/* Party hub — countdown + details share one card */
+.party-hub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.party-hub-block .section-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.55rem;
+}
+
+.party-hub-block--details .details-list {
+  margin-bottom: 0.75rem;
+}
+
+.party-hub-block--details .details-row {
+  padding: 0.45rem 0;
+}
+
+.btn-maps--compact {
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+@media (min-width: 720px) {
+  .party-hub-grid {
+    gap: 1.5rem;
+  }
+}
+
 /* Gallery — dual animated stacks */
 .gallery-card {
   position: relative;
@@ -1380,183 +1413,78 @@ html.scroll-story-root body.scroll-story {
     min-height: 100svh;
     max-height: 100svh;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: calc(0.45rem + var(--safe-top)) 0.55rem calc(2.15rem + var(--safe-bottom));
     overflow: hidden;
     scroll-snap-stop: always;
-  }
-
-  .scroll-act--party .act-deco--confetti {
-    display: none;
+    justify-content: center;
+    padding: calc(0.75rem + var(--safe-top)) 0.75rem calc(2.4rem + var(--safe-bottom));
   }
 
   .scroll-act--party .act-inner--cards {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.32rem;
-    min-height: 0;
-    max-height: none;
+    gap: 0.65rem;
     width: 100%;
-    overflow: hidden;
-    font-size: clamp(0.8125rem, 1.6vh + 0.45rem, 0.875rem);
   }
 
-  .scroll-act--party .countdown-card,
-  .scroll-act--party .details-card {
-    flex: 0 0 auto;
-  }
-
+  .scroll-act--party .party-hub-card,
   .scroll-act--party .rsvp-card {
-    flex: 1 1 auto;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    padding: 0.75rem 0.8rem;
   }
 
-  .scroll-act--party .card {
-    padding: 0.45rem 0.55rem;
+  .party-hub-grid {
+    gap: 0.55rem;
   }
 
-  .scroll-act--party .countdown-card .section-title,
-  .scroll-act--party .details-card .section-title,
+  .party-hub-block .section-title {
+    font-size: 0.98rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .party-hub-block--countdown .countdown {
+    gap: 0.35rem;
+  }
+
+  .party-hub-block--countdown .countdown-unit {
+    padding: 0.5rem 0.2rem;
+  }
+
+  .party-hub-block--details .details-list {
+    margin-bottom: 0.55rem;
+  }
+
+  .party-hub-block--details .details-row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    padding: 0.3rem 0;
+  }
+
   .scroll-act--party .rsvp-card .section-lead {
-    display: none;
-  }
-
-  .scroll-act--party .rsvp-card .section-title {
-    font-size: 0.95rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .scroll-act--party .countdown {
-    gap: 0.28rem;
-  }
-
-  .scroll-act--party .countdown-unit {
-    padding: 0.32rem 0.12rem;
-    border-radius: 10px;
-  }
-
-  .scroll-act--party .countdown-value {
-    font-size: clamp(1.05rem, 5.2vw, 1.25rem);
-    line-height: 1.1;
-  }
-
-  .scroll-act--party .countdown-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.02em;
-  }
-
-  .scroll-act--party .details-list {
-    margin: 0 0 0.35rem;
-  }
-
-  .scroll-act--party .details-row {
-    grid-template-columns: 3.75rem 1fr;
-    gap: 0.25rem;
-    padding: 0.22rem 0;
-  }
-
-  .scroll-act--party .details-row dt {
-    font-size: 0.8rem;
-  }
-
-  .scroll-act--party .details-row dd {
-    font-size: 0.85rem;
-    line-height: 1.25;
-  }
-
-  .scroll-act--party .details-sub {
-    font-size: 0.75rem;
-    margin-top: 0.1rem;
-  }
-
-  .scroll-act--party .btn {
-    min-height: unset;
-    padding: 0.48rem 0.6rem;
-    font-size: 0.85rem;
-    border-radius: 12px;
+    margin: -0.1rem 0 0.55rem;
+    font-size: 0.9rem;
   }
 
   .scroll-act--party .rsvp-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 0.35rem;
-    row-gap: 0.3rem;
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .scroll-act--party .rsvp-form > label,
-  .scroll-act--party .rsvp-form > .btn-rsvp,
-  .scroll-act--party .rsvp-status {
-    grid-column: 1 / -1;
-  }
-
-  .scroll-act--party .rsvp-form > fieldset {
-    min-width: 0;
-  }
-
-  .scroll-act--party .rsvp-field {
-    gap: 0.2rem;
-  }
-
-  .scroll-act--party .rsvp-form > label:has(textarea) {
-    display: none;
-  }
-
-  .scroll-act--party .rsvp-label,
-  .scroll-act--party .rsvp-field legend {
-    font-size: 0.8rem;
-    line-height: 1.2;
-  }
-
-  .scroll-act--party .rsvp-form input[type="text"] {
-    padding: 0.42rem 0.55rem;
-    font-size: 0.9rem;
-    border-radius: 10px;
+    gap: 0.55rem;
   }
 
   .scroll-act--party .rsvp-radio-group {
     flex-direction: row;
-    gap: 0.28rem;
+    gap: 0.45rem;
   }
 
   .scroll-act--party .rsvp-radio {
     flex: 1;
-    justify-content: center;
-    padding: 0.32rem 0.2rem;
-    font-size: 0.78rem;
-    line-height: 1.15;
-    gap: 0.25rem;
-    border-radius: 9px;
-    text-align: center;
   }
 
-  .scroll-act--party .rsvp-radio input {
-    width: 0.8rem;
-    height: 0.8rem;
-    flex-shrink: 0;
+  .scroll-act--party .rsvp-form textarea {
+    min-height: 2.85rem;
+    resize: none;
   }
 
-  .scroll-act--party .rsvp-radio span {
-    min-width: 0;
-  }
-
-  .scroll-act--party .rsvp-status {
-    margin-top: 0.2rem;
-    padding: 0.3rem;
-    font-size: 0.78rem;
+  .scroll-act--party .btn {
+    min-height: 46px;
   }
 
   .scroll-act--party .scroll-hint {
-    bottom: calc(0.35rem + var(--safe-bottom));
-    font-size: 0.8rem;
+    bottom: calc(0.5rem + var(--safe-bottom));
   }
 
   .scroll-act--memories {
