@@ -65,56 +65,59 @@
       <div class="act-deco act-deco--confetti" aria-hidden="true">🎊 🥂 🎉</div>
 
       <div class="act-inner act-inner--cards">
-        <section class="card countdown-card anim-item" style="--i: 0" aria-labelledby="countdown-heading">
-          <h2 id="countdown-heading" class="section-title">Countdown</h2>
-          <div class="countdown countdown-ltr" id="countdown" role="timer" aria-live="polite">
-            <div class="countdown-unit anim-item" style="--i: 1">
-              <span class="countdown-value" id="cd-days">—</span>
-              <span class="countdown-label" data-ui="days">Days</span>
+        <section class="card party-hub-card anim-item" style="--i: 0" aria-label="Celebration details">
+          <div class="party-hub-grid">
+            <div class="party-hub-block party-hub-block--countdown" aria-labelledby="countdown-heading">
+              <h2 id="countdown-heading" class="section-title">Countdown</h2>
+              <div class="countdown countdown-ltr" id="countdown" role="timer" aria-live="polite">
+                <div class="countdown-unit anim-item" style="--i: 1">
+                  <span class="countdown-value" id="cd-days">—</span>
+                  <span class="countdown-label" data-ui="days">Days</span>
+                </div>
+                <div class="countdown-unit anim-item" style="--i: 2">
+                  <span class="countdown-value" id="cd-hours">—</span>
+                  <span class="countdown-label" data-ui="hours">Hours</span>
+                </div>
+                <div class="countdown-unit anim-item" style="--i: 3">
+                  <span class="countdown-value" id="cd-mins">—</span>
+                  <span class="countdown-label" data-ui="minutes">Minutes</span>
+                </div>
+                <div class="countdown-unit anim-item" style="--i: 4">
+                  <span class="countdown-value" id="cd-secs">—</span>
+                  <span class="countdown-label" data-ui="seconds">Seconds</span>
+                </div>
+              </div>
             </div>
-            <div class="countdown-unit anim-item" style="--i: 2">
-              <span class="countdown-value" id="cd-hours">—</span>
-              <span class="countdown-label" data-ui="hours">Hours</span>
-            </div>
-            <div class="countdown-unit anim-item" style="--i: 3">
-              <span class="countdown-value" id="cd-mins">—</span>
-              <span class="countdown-label" data-ui="minutes">Minutes</span>
-            </div>
-            <div class="countdown-unit anim-item" style="--i: 4">
-              <span class="countdown-value" id="cd-secs">—</span>
-              <span class="countdown-label" data-ui="seconds">Seconds</span>
+            <div class="party-hub-block party-hub-block--details" aria-labelledby="details-heading">
+              <h2 id="details-heading" class="section-title">Celebration details</h2>
+              <dl class="details-list">
+                <div class="details-row">
+                  <dt data-ui="labelDate">Date</dt>
+                  <dd id="detail-date" lang="en">30 / 9 / 2026</dd>
+                </div>
+                <div class="details-row">
+                  <dt data-ui="labelVenue">Venue</dt>
+                  <dd>
+                    <span id="venue-name" lang="en">La Terrace, JW Marriott</span>
+                    <span class="details-sub" id="venue-area" lang="en">Fifth Settlement, Cairo</span>
+                  </dd>
+                </div>
+              </dl>
+              <a
+                class="btn btn-maps btn-maps--compact anim-item"
+                style="--i: 5"
+                id="maps-link"
+                href="https://www.google.com/maps/place/Club+House/@30.07078,31.4359958,18z/data=!4m6!3m5!1s0x145817197b9f1de9:0x1bf309708d796b1f!8m2!3d30.0699596!4d31.4344754!16s%2Fg%2F11vdbcj_fv?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open location in Maps
+              </a>
             </div>
           </div>
         </section>
 
-        <section class="card details-card anim-item" style="--i: 5" aria-labelledby="details-heading">
-          <h2 id="details-heading" class="section-title">Celebration details</h2>
-          <dl class="details-list">
-            <div class="details-row">
-              <dt data-ui="labelDate">Date</dt>
-              <dd id="detail-date" lang="en">30 / 9 / 2026</dd>
-            </div>
-            <div class="details-row">
-              <dt data-ui="labelVenue">Venue</dt>
-              <dd>
-                <span id="venue-name" lang="en">La Terrace, JW Marriott</span>
-                <span class="details-sub" id="venue-area" lang="en">Fifth Settlement, Cairo</span>
-              </dd>
-            </div>
-          </dl>
-          <a
-            class="btn btn-maps anim-item"
-            style="--i: 6"
-            id="maps-link"
-            href="https://www.google.com/maps/place/Club+House/@30.07078,31.4359958,18z/data=!4m6!3m5!1s0x145817197b9f1de9:0x1bf309708d796b1f!8m2!3d30.0699596!4d31.4344754!16s%2Fg%2F11vdbcj_fv?entry=ttu&g_ep=EgoyMDI2MDUyNi4wIKXMDSoASAFQAw%3D%3D"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open location in Maps
-          </a>
-        </section>
-
-        <section class="card rsvp-card anim-item" style="--i: 7" id="rsvp-section" aria-labelledby="rsvp-heading">
+        <section class="card rsvp-card anim-item" style="--i: 6" id="rsvp-section" aria-labelledby="rsvp-heading">
           <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
           <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
           <form class="rsvp-form" id="rsvp-form">
