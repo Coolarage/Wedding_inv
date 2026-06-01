@@ -279,8 +279,6 @@
     const act = acts[actIndex];
     if (!act || actIndex === 0) return false;
 
-    if (mobileQuery.matches && actIndex === 1) return false;
-
     const actTall = act.offsetHeight > window.innerHeight + 16;
     if (!actTall) return false;
 
@@ -303,11 +301,13 @@
     }
 
     let deepInTallAct = false;
-    const act3 = acts[2];
-    if (act3 && act3.offsetHeight > window.innerHeight + 16) {
-      const rect = act3.getBoundingClientRect();
+    for (let i = 1; i < acts.length; i++) {
+      const act = acts[i];
+      if (act.offsetHeight <= window.innerHeight + 16) continue;
+      const rect = act.getBoundingClientRect();
       if (rect.top < -24 && rect.bottom > window.innerHeight * 0.35) {
         deepInTallAct = true;
+        break;
       }
     }
 
