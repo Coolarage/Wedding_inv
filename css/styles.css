@@ -1408,83 +1408,65 @@ html.scroll-story-root body.scroll-story {
   }
 
   .scroll-act--party {
-    height: 100dvh;
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
-    max-height: 100svh;
-    box-sizing: border-box;
-    overflow: hidden;
-    scroll-snap-stop: always;
-    justify-content: center;
-    padding: calc(0.75rem + var(--safe-top)) 0.75rem calc(2.4rem + var(--safe-bottom));
+    max-height: none;
+    overflow: visible;
+    scroll-snap-stop: normal;
+    justify-content: flex-start;
+    padding: calc(1rem + var(--safe-top)) 0.75rem calc(1.25rem + var(--safe-bottom));
   }
 
   .scroll-act--party .act-inner--cards {
-    gap: 0.65rem;
+    gap: 1rem;
     width: 100%;
   }
 
   .scroll-act--party .party-hub-card,
   .scroll-act--party .rsvp-card {
-    padding: 0.75rem 0.8rem;
+    padding: 1rem 0.85rem;
   }
 
   .party-hub-grid {
-    gap: 0.55rem;
-  }
-
-  .party-hub-block .section-title {
-    font-size: 0.98rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .party-hub-block--countdown .countdown {
-    gap: 0.35rem;
-  }
-
-  .party-hub-block--countdown .countdown-unit {
-    padding: 0.5rem 0.2rem;
-  }
-
-  .party-hub-block--details .details-list {
-    margin-bottom: 0.55rem;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
 
   .party-hub-block--details .details-row {
-    grid-template-columns: 1fr;
-    gap: 0.1rem;
-    padding: 0.3rem 0;
-  }
-
-  .scroll-act--party .rsvp-card .section-lead {
-    margin: -0.1rem 0 0.55rem;
-    font-size: 0.9rem;
-  }
-
-  .scroll-act--party .rsvp-form {
-    gap: 0.55rem;
+    grid-template-columns: 5rem 1fr;
   }
 
   .scroll-act--party .rsvp-radio-group {
-    flex-direction: row;
-    gap: 0.45rem;
-  }
-
-  .scroll-act--party .rsvp-radio {
-    flex: 1;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .scroll-act--party .rsvp-form textarea {
-    min-height: 2.85rem;
-    resize: none;
-  }
-
-  .scroll-act--party .btn {
-    min-height: 46px;
+    min-height: unset;
+    resize: vertical;
   }
 
   .scroll-act--party .scroll-hint {
-    bottom: calc(0.5rem + var(--safe-bottom));
+    position: static;
+    transform: none;
+    margin: 0.75rem auto 0;
+    width: max-content;
+    animation: none;
+    opacity: 0.85;
+  }
+
+  .scroll-act--party.is-seen .scroll-hint {
+    animation: hint-bounce-inline 2s ease-in-out infinite;
+  }
+
+  @keyframes hint-bounce-inline {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
   }
 
   .scroll-act--memories {
