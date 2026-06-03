@@ -1537,13 +1537,18 @@ html.scroll-story-root body.scroll-story {
 }
 
 @media (min-width: 720px) {
+  .scroll-act--party,
+  .scroll-act--memories {
+    justify-content: center;
+    padding-top: calc(1.25rem + var(--safe-top));
+  }
+
   .act-inner,
   .act-inner--tall {
     max-width: 44rem;
   }
 }
 
-/* Celebration burst particles */
 .act-burst {
   position: absolute;
   inset: 0;
@@ -1790,13 +1795,6 @@ body.is-rtl .act-nav {
 .scroll-act--memories .site-footer {
   margin: 0;
   max-width: none;
-}
-
-@media (min-width: 720px) {
-  .act-inner,
-  .act-inner--tall {
-    max-width: 44rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
