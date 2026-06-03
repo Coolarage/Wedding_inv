@@ -1,53 +1,76 @@
-# RSVP → Google Sheet setup
+# RSVP → Google Sheet (Apps Script)
 
-The site sends RSVPs to a **Google Sheet** using a free Google Apps Script web app.
+**If Extensions → Apps Script shows “Sorry, the file cannot be opened”**, skip Google entirely and use **[Supabase](../supabase/README.md)** instead — same form on your site, ~5 minutes to set up.
 
-## Step 1 — Create the sheet
+---
 
-1. Go to [Google Sheets](https://sheets.google.com) → **Blank spreadsheet**
-2. Name it e.g. `Mohab & Hams RSVP`
-3. In **row 1**, add these headers:
+## Option A — Supabase (easiest)
+
+See **[supabase/README.md](../supabase/README.md)**. No Google Apps Script required.
+
+---
+
+## Option B — Apps Script without the Extensions menu
+
+The Extensions menu often breaks when you’re signed into **multiple Google accounts**. Use this path instead:
+
+### 1 — Create the sheet
+
+1. Sign in to **one** Google account only (Incognito window helps).
+2. [Google Sheets](https://sheets.google.com) → blank spreadsheet → name it `Mohab & Hams RSVP`.
+3. Row 1 headers:
 
 | A | B | C | D | E | F |
 |---|---|---|---|---|---|
 | Timestamp | Name | Attending | Plus One | Message | Page |
 
-## Step 2 — Add the script
+4. Copy the **Sheet ID** from the URL:  
+   `https://docs.google.com/spreadsheets/d/THIS_PART/edit`
 
-1. **Extensions → Apps Script**
-2. Delete any default code
-3. Paste the contents of `google-apps-script/Code.gs` from this project
-4. **Save** (name the project `Wedding RSVP`)
+### 2 — Create the script at script.google.com
 
-## Step 3 — Deploy as web app
+1. Open **[script.google.com/home](https://script.google.com/home)** in the **same account** as the sheet.
+2. **New project** → delete default code.
+3. Paste `Code.gs` from this folder.
+4. Replace `PASTE_YOUR_SHEET_ID_HERE` with your Sheet ID.
+5. **Save** (name it `Wedding RSVP`).
 
-1. **Deploy → New deployment**
-2. Type: **Web app**
-3. **Execute as:** Me
-4. **Who has access:** Anyone
-5. Click **Deploy** → authorize when asked
-6. **Copy the Web app URL** (looks like `https://script.google.com/macros/s/...../exec`)
+### 3 — Deploy
 
-## Step 4 — Connect the website
+1. **Deploy → New deployment → Web app**
+2. Execute as: **Me**
+3. Who has access: **Anyone**
+4. **Deploy** → authorize → copy the URL ending in `/exec`
 
-Open `config.js` and paste your URL:
+### 4 — Connect the site
+
+In `config.js`:
 
 ```javascript
 rsvp: {
-  scriptUrl: "https://script.google.com/macros/s/YOUR_ID_HERE/exec",
+  scriptUrl: "https://script.google.com/macros/s/YOUR_ID/exec",
+  supabase: { url: "", anonKey: "", table: "rsvps" },
 },
 ```
 
-Commit, push to GitHub, wait for Vercel to redeploy (~1 min).
+Push to GitHub so Vercel updates.
 
-## Test
+### 5 — Test
 
-1. Open `en.html` on your live site
-2. Submit a test RSVP
-3. Check the Google Sheet — a new row should appear within a few seconds
+Open the `/exec` URL in a browser — you should see:
+
+`{"ok":true,"message":"RSVP endpoint is running."}`
+
+Then submit a test RSVP on the live site and check the sheet.
+
+---
 
 ## Troubleshooting
 
-- **No rows appearing:** Redeploy the script as **New version**, ensure access is **Anyone**
-- **Form says “not connected”:** `scriptUrl` is empty in `config.js` on the deployed site
-- **Duplicate submissions:** Normal if guests submit twice; filter by name in the sheet
+| Problem | Fix |
+|--------|-----|
+| “File cannot be opened” from Extensions | Use **script.google.com** directly (step 2 above) or **Supabase** |
+| `authuser=3` in the URL | Wrong Google account — use Incognito with one account |
+| No rows in sheet | Redeploy as **New version**; access must be **Anyone** |
+| Form says “not connected” | Both `scriptUrl` and `supabase` are empty in deployed `config.js` |
+| Work/school Google account | Admin may block Apps Script — use **Supabase** or personal Gmail |
