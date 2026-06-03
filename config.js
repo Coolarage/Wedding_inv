@@ -34,11 +34,18 @@ window.WEDDING_CONFIG = {
     "Photo7.jpeg",
   ],
   /**
-   * RSVP → Google Sheet via Apps Script (see google-apps-script/Code.gs).
-   * Paste your Web app URL after deploying. Leave empty until ready.
+   * RSVP backend — use **one** of these:
+   *
+   * A) Supabase (recommended if Apps Script fails) — see supabase/README.md
+   * B) Google Sheet via Apps Script — see google-apps-script/README.md
    */
   rsvp: {
     scriptUrl: "",
+    supabase: {
+      url: "",
+      anonKey: "",
+      table: "rsvps",
+    },
   },
 };
 
