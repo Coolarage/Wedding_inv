@@ -45,6 +45,19 @@
     }
 
     primeFirstAct();
+
+    window.WeddingScrollActs = {
+      goToAct(index) {
+        goToAct(index, { force: true });
+      },
+      refresh() {
+        syncTallActScrollMode();
+      },
+    };
+
+    if (document.body.classList.contains("rsvp-completed")) {
+      syncTallActScrollMode();
+    }
   }
 
   function primeFirstAct() {

@@ -3,10 +3,69 @@
   const ui = window.UI_COPY || {};
   const rsvpCfg = cfg.rsvp || {};
   const supabaseCfg = rsvpCfg.supabase || {};
+  const RSVP_DONE_KEY = "wedding-rsvp-done";
+  const RSVP_COMPLETE_DELAY_MS = 900;
 
   const form = document.getElementById("rsvp-form");
   const statusEl = document.getElementById("rsvp-status");
   if (!form) return;
+
+  function rsvpStorageKey() {
+    return `${RSVP_DONE_KEY}:${pageSource()}`;
+  }
+
+  function isRsvpComplete() {
+    try {
+      return localStorage.getItem(rsvpStorageKey()) === "1";
+    } catch {
+      return false;
+    }
+  }
+
+  function markRsvpComplete() {
+    try {
+      localStorage.setItem(rsvpStorageKey(), "1");
+    } catch {
+      /* storage unavailable */
+    }
+  }
+
+  function removeRsvpCard() {
+    const section = document.getElementById("rsvp-section");
+    if (section) section.remove();
+    document.body.classList.add("rsvp-completed");
+    window.WeddingScrollActs?.refresh?.();
+  }
+
+  function goToActThree() {
+    const scrollActs = window.WeddingScrollActs;
+    if (scrollActs?.goToAct) {
+      scrollActs.goToAct(2);
+      return;
+    }
+    document.getElementById("act-3")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  function finishRsvpFlow() {
+    markRsvpComplete();
+    setStatus(
+      ui.rsvpSuccess || "Thank you! Your RSVP was received. 💕",
+      "success"
+    );
+
+    window.setTimeout(() => {
+      removeRsvpCard();
+      goToActThree();
+    }, RSVP_COMPLETE_DELAY_MS);
+  }
+
+  if (isRsvpComplete()) {
+    removeRsvpCard();
+    return;
+  }
 
   const guestName = document.documentElement.getAttribute("data-guest-name");
   const nameInput = document.getElementById("rsvp-name");
@@ -83,6 +142,7 @@
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (isRsvpComplete()) return;
 
     const useSupabase = supabaseReady();
     const useScript = scriptReady();
@@ -101,6 +161,7 @@
     setStatus(ui.rsvpSending || "Sending…", "info");
 
     const formData = new FormData(form);
+    let succeeded = false;
 
     try {
       if (useSupabase) {
@@ -109,15 +170,13 @@
         await submitToAppsScript(formData);
       }
 
+      succeeded = true;
       form.reset();
-      setStatus(
-        ui.rsvpSuccess || "Thank you! Your RSVP was received. 💕",
-        "success"
-      );
+      finishRsvpFlow();
     } catch (err) {
       setStatus(ui.rsvpError || "Something went wrong. Please try again.", "error");
     } finally {
-      if (submitBtn) submitBtn.disabled = false;
+      if (!succeeded && submitBtn) submitBtn.disabled = false;
     }
   });
 })();
