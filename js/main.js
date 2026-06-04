@@ -152,6 +152,34 @@
 
     document.getElementById("footer-line").textContent =
       enCopy.footerLine || copy.footerLine;
+
+    applyOurStory();
+  }
+
+  function applyOurStory() {
+    const bodyEl = document.getElementById("our-story-body");
+    const headingEl = document.getElementById("our-story-heading");
+    if (!bodyEl) return;
+
+    const title = document.documentElement.getAttribute("data-our-story-title");
+    const story = document.documentElement.getAttribute("data-our-story");
+
+    if (title && headingEl) headingEl.textContent = title;
+
+    if (!story || !story.trim()) return;
+
+    const paragraphs = story
+      .split(/\n\s*\n/)
+      .map((part) => part.trim())
+      .filter(Boolean);
+
+    bodyEl.replaceChildren(
+      ...paragraphs.map((text) => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        return p;
+      })
+    );
   }
 
   function set(id, text) {
