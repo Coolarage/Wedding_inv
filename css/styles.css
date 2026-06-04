@@ -954,6 +954,32 @@ body.is-rtl .details-row dd {
   max-width: 44rem;
 }
 
+.our-story-card {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 77, 141, 0.12),
+    rgba(255, 193, 7, 0.08)
+  );
+}
+
+.our-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text);
+}
+
+.our-story-body p {
+  margin: 0;
+}
+
+.our-story-body code {
+  font-size: 0.88em;
+  opacity: 0.85;
+}
+
 /* RSVP form */
 .rsvp-card {
   background: linear-gradient(
@@ -1423,7 +1449,8 @@ html.scroll-story-root body.scroll-story {
   }
 
   .scroll-act--party .party-hub-card,
-  .scroll-act--party .rsvp-card {
+  .scroll-act--party .rsvp-card,
+  .scroll-act--party .our-story-card {
     padding: 1rem 0.85rem;
   }
 

@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <!--
   SPECIAL INVITE — duplicate with a secret filename (e.g. special/a8f3-khaled.html)
-  Set data-guest-name on <html>. Share the private URL only. Do NOT deploy until finalized.
+
+  Per guest, edit the <html> attributes (or the Our Story card below):
+  - data-guest-name="Khaled" — Act 1 eyebrow (unless data-guest-message is set)
+  - data-guest-message="" — optional full custom Act 1 eyebrow
+  - data-our-story-title="Our Story" — optional Act 2 card title
+  - data-our-story="" — your message; use blank lines for new paragraphs
+    Example: data-our-story="We met in 2019…\n\nYou have been part of our journey…"
+  Or leave data-our-story empty and edit #our-story-body HTML in the duplicated file.
+
+  Share the private URL only. Do NOT deploy until finalized.
 -->
 <html
   lang="en"
@@ -10,6 +19,8 @@
   data-invite-type="special"
   data-guest-name="Dear Guest"
   data-guest-message=""
+  data-our-story-title="Our Story"
+  data-our-story=""
   class="scroll-story-root"
 >
   <head>
@@ -82,8 +93,8 @@
       </a>
     </section>
 
-    <!-- ACT 2 · The celebration & RSVP -->
-    <section class="scroll-act scroll-act--party" id="act-2" data-act="2" aria-label="Celebration details and RSVP">
+    <!-- ACT 2 · Celebration details & our story -->
+    <section class="scroll-act scroll-act--party" id="act-2" data-act="2" aria-label="Celebration details and our story">
       <div class="act-burst" aria-hidden="true"></div>
       <div class="act-deco act-deco--confetti" aria-hidden="true">🎊 🥂 🎉</div>
 
@@ -140,47 +151,19 @@
           </div>
         </section>
 
-        <section class="card rsvp-card anim-item" style="--i: 6" id="rsvp-section" aria-labelledby="rsvp-heading">
-          <h2 id="rsvp-heading" class="section-title">💌 RSVP</h2>
-          <p class="section-lead" id="rsvp-lead">We would love to know if you can celebrate with us</p>
-          <form class="rsvp-form" id="rsvp-form">
-            <label class="rsvp-field">
-              <span class="rsvp-label" id="rsvp-label-name">Your name</span>
-              <input type="text" name="name" id="rsvp-name" required autocomplete="name" />
-            </label>
-            <fieldset class="rsvp-field">
-              <legend class="rsvp-label" id="rsvp-label-attending">Will you attend?</legend>
-              <div class="rsvp-radio-group">
-                <label class="rsvp-radio">
-                  <input type="radio" name="attending" value="Yes" required />
-                  <span id="rsvp-attending-yes">Yes, joyfully!</span>
-                </label>
-                <label class="rsvp-radio">
-                  <input type="radio" name="attending" value="No" />
-                  <span id="rsvp-attending-no">Sorry, I can't make it</span>
-                </label>
-              </div>
-            </fieldset>
-            <fieldset class="rsvp-field">
-              <legend class="rsvp-label" id="rsvp-label-plus-one">Will you bring a +1?</legend>
-              <div class="rsvp-radio-group">
-                <label class="rsvp-radio">
-                  <input type="radio" name="plusOne" value="Yes" />
-                  <span id="rsvp-plus-one-yes">Yes</span>
-                </label>
-                <label class="rsvp-radio">
-                  <input type="radio" name="plusOne" value="No" />
-                  <span id="rsvp-plus-one-no">No</span>
-                </label>
-              </div>
-            </fieldset>
-            <label class="rsvp-field">
-              <span class="rsvp-label" id="rsvp-label-message">Message (optional)</span>
-              <textarea name="message" id="rsvp-message" rows="2"></textarea>
-            </label>
-            <button type="submit" class="btn btn-rsvp" id="rsvp-submit">Send RSVP</button>
-          </form>
-          <p class="rsvp-status" id="rsvp-status" hidden role="status"></p>
+        <section
+          class="card our-story-card anim-item"
+          style="--i: 6"
+          id="our-story-section"
+          aria-labelledby="our-story-heading"
+        >
+          <h2 id="our-story-heading" class="section-title">Our Story</h2>
+          <div class="our-story-body" id="our-story-body">
+            <p>
+              Write your personalized message here when you duplicate this file, or set
+              <code>data-our-story</code> on the <code>&lt;html&gt;</code> tag.
+            </p>
+          </div>
         </section>
       </div>
 
@@ -233,7 +216,6 @@
 
     <script src="../config.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/rsvp.js"></script>
     <script src="../js/scroll-acts.js"></script>
   </body>
 </html>
