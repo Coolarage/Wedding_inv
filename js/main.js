@@ -10,6 +10,10 @@
   const copy = inviteCopy[pageLang] || inviteCopy.ar;
   const enCopy = inviteCopy.en || {};
   const arCopy = inviteCopy.ar || {};
+  const uiLabels =
+    pageLang === "ar" && !isSpecial && window.UI_COPY_AR
+      ? window.UI_COPY_AR
+      : ui;
 
   const assetRoot = isSpecial ? ".." : ".";
 
@@ -70,27 +74,47 @@
       if (el) el.textContent = text;
     };
 
-    set("countdown-heading", ui.countdownTitle || "Countdown");
-    document.querySelector('[data-ui="days"]').textContent = ui.days || "Days";
-    document.querySelector('[data-ui="hours"]').textContent = ui.hours || "Hours";
+    set("countdown-heading", uiLabels.countdownTitle || ui.countdownTitle || "Countdown");
+    document.querySelector('[data-ui="days"]').textContent =
+      uiLabels.days || ui.days || "Days";
+    document.querySelector('[data-ui="hours"]').textContent =
+      uiLabels.hours || ui.hours || "Hours";
     document.querySelector('[data-ui="minutes"]').textContent =
-      ui.minutes || "Minutes";
+      uiLabels.minutes || ui.minutes || "Minutes";
     document.querySelector('[data-ui="seconds"]').textContent =
-      ui.seconds || "Seconds";
-    set("details-heading", ui.detailsTitle || "Celebration details");
+      uiLabels.seconds || ui.seconds || "Seconds";
+    set("details-heading", uiLabels.detailsTitle || ui.detailsTitle || "Celebration details");
     document.querySelector('[data-ui="labelDate"]').textContent =
-      ui.labelDate || "Date";
+      uiLabels.labelDate || ui.labelDate || "Date";
+    const labelTime = document.querySelector('[data-ui="labelTime"]');
+    if (labelTime) {
+      labelTime.textContent = uiLabels.labelTime || ui.labelTime || "Time";
+    }
     document.querySelector('[data-ui="labelVenue"]').textContent =
-      ui.labelVenue || "Venue";
-    set("maps-link", ui.openMaps || "Open location in Maps");
-    set("gallery-heading", ui.galleryTitle || "Our memories");
-    set("gallery-lead", ui.galleryLead || "A little stack of our favorite moments");
-    set("stack-label-left", ui.stackLabelLeft || "💕");
-    set("stack-label-right", ui.stackLabelRight || "✨");
-    set("scroll-hint-1", ui.scrollHint1 || "Scroll to celebrate");
-    set("scroll-hint-2", ui.scrollHint2 || "Our memories await");
-    set("back-to-top", ui.backToTop || "Back to top");
+      uiLabels.labelVenue || ui.labelVenue || "Venue";
+    const labelDress = document.querySelector('[data-ui="labelDressCode"]');
+    if (labelDress) {
+      labelDress.textContent =
+        uiLabels.labelDressCode || ui.labelDressCode || "Dress code";
+    }
+    const labelProgram = document.querySelector('[data-ui="labelProgram"]');
+    if (labelProgram) {
+      labelProgram.textContent =
+        uiLabels.labelProgram || ui.labelProgram || "Evening";
+    }
+    set("maps-link", uiLabels.openMaps || ui.openMaps || "Open location in Maps");
+    set("gallery-heading", uiLabels.galleryTitle || ui.galleryTitle || "Our memories");
+    set(
+      "gallery-lead",
+      uiLabels.galleryLead || ui.galleryLead || "A little stack of our favorite moments"
+    );
+    set("stack-label-left", uiLabels.stackLabelLeft || ui.stackLabelLeft || "💕");
+    set("stack-label-right", uiLabels.stackLabelRight || ui.stackLabelRight || "✨");
+    set("scroll-hint-1", uiLabels.scrollHint1 || ui.scrollHint1 || "Scroll to celebrate");
+    set("scroll-hint-2", uiLabels.scrollHint2 || ui.scrollHint2 || "Our memories await");
+    set("back-to-top", uiLabels.backToTop || ui.backToTop || "Back to top");
     applyRsvpLabels();
+    window.WeddingTheme?.refresh?.();
   }
 
   function applyRsvpLabels() {
@@ -243,13 +267,32 @@
       : pageLang === "ar"
         ? eventAr.dateDetail || "٣٠ / ٩ / ٢٠٢٦"
         : eventEn.dateDetail || "30 / 9 / 2026";
+    const eventMeta = isSpecial || pageLang === "en" ? eventEn : eventAr;
+    const detailLang = isSpecial || pageLang === "en" ? "en" : "ar";
 
     const weddingDateEl = document.getElementById("wedding-date");
     weddingDateEl.textContent = dateLine;
     weddingDateEl.lang = isSpecial || pageLang === "en" ? "en" : "ar";
     document.getElementById("detail-date").textContent = dateDetail;
-    document.getElementById("detail-date").lang =
-      isSpecial || pageLang === "en" ? "en" : "ar";
+    document.getElementById("detail-date").lang = detailLang;
+
+    const detailTime = document.getElementById("detail-time");
+    if (detailTime) {
+      detailTime.textContent = eventMeta.time || "6:00 PM";
+      detailTime.lang = detailLang;
+    }
+
+    const detailDress = document.getElementById("detail-dress");
+    if (detailDress) {
+      detailDress.textContent = eventMeta.dressCode || "";
+      detailDress.lang = detailLang;
+    }
+
+    const detailProgram = document.getElementById("detail-program");
+    if (detailProgram) {
+      detailProgram.textContent = eventMeta.program || "";
+      detailProgram.lang = detailLang;
+    }
 
     const names = getNames();
     document.getElementById("groom-name").textContent = names.heroGroom;
@@ -259,8 +302,13 @@
     const venue = cfg.venue || {};
     document.getElementById("venue-name").textContent =
       venue.nameEn || "La Terrace, JW Marriott";
-    document.getElementById("venue-area").textContent =
-      venue.areaEn || "Fifth Settlement, Cairo";
+    const venueArea = document.getElementById("venue-area");
+    if (venueArea) {
+      const areaParts = [venue.areaEn, venue.addressEn].filter(Boolean);
+      venueArea.textContent =
+        areaParts.join(" · ") || "Fifth Settlement, New Cairo";
+      venueArea.lang = "en";
+    }
 
     const quran = cfg.quranVerse;
     const quranText = document.getElementById("quran-text");

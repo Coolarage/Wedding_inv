@@ -1576,10 +1576,31 @@ html.scroll-story-root body.scroll-story {
     padding-bottom: calc(2.5rem + var(--safe-bottom));
   }
 
+  body.rsvp-completed .scroll-act--party {
+    justify-content: center;
+    padding-bottom: calc(1.25rem + var(--safe-bottom));
+  }
+
   .act-inner,
   .act-inner--tall {
     max-width: 44rem;
   }
+}
+
+body.rsvp-completed .scroll-act--party {
+  justify-content: center;
+}
+
+.party-hub-block--details .details-row {
+  padding: 0.4rem 0;
+}
+
+.party-hub-block--details .details-row dt {
+  font-size: 0.88rem;
+}
+
+.party-hub-block--details .details-row dd {
+  font-size: 0.95rem;
 }
 
 .act-burst {

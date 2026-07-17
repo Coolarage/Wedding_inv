@@ -1,17 +1,19 @@
 (function () {
   const STORAGE_KEY = "wedding-theme";
+  const DEFAULT_THEME = "light";
 
   function storedTheme() {
     try {
       const value = localStorage.getItem(STORAGE_KEY);
-      return value === "light" ? "light" : "dark";
+      if (value === "dark" || value === "light") return value;
+      return DEFAULT_THEME;
     } catch {
-      return "dark";
+      return DEFAULT_THEME;
     }
   }
 
   function applyTheme(theme) {
-    const next = theme === "light" ? "light" : "dark";
+    const next = theme === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
 
     try {
@@ -28,11 +30,22 @@
     updateToggle(next);
   }
 
+  function uiCopy() {
+    const pageLang =
+      document.documentElement.getAttribute("data-invite-lang") || "en";
+    const isSpecial =
+      document.documentElement.getAttribute("data-invite-type") === "special";
+    if (pageLang === "ar" && !isSpecial && window.UI_COPY_AR) {
+      return window.UI_COPY_AR;
+    }
+    return window.UI_COPY || {};
+  }
+
   function updateToggle(theme) {
     const btn = document.getElementById("theme-toggle");
     if (!btn) return;
 
-    const ui = window.UI_COPY || {};
+    const ui = uiCopy();
     const isLight = theme === "light";
 
     btn.setAttribute("aria-pressed", isLight ? "true" : "false");
@@ -54,7 +67,9 @@
     btn.id = "theme-toggle";
     btn.className = "theme-toggle";
     document.body.appendChild(btn);
-    updateToggle(document.documentElement.getAttribute("data-theme") || "dark");
+    updateToggle(
+      document.documentElement.getAttribute("data-theme") || DEFAULT_THEME
+    );
     btn.addEventListener("click", () => {
       const current =
         document.documentElement.getAttribute("data-theme") === "light"
@@ -63,6 +78,14 @@
       applyTheme(current === "light" ? "dark" : "light");
     });
   }
+
+  window.WeddingTheme = {
+    refresh() {
+      updateToggle(
+        document.documentElement.getAttribute("data-theme") || DEFAULT_THEME
+      );
+    },
+  };
 
   applyTheme(storedTheme());
 
