@@ -1,6 +1,7 @@
 /* Mobile-first wedding invite — energetic theme */
 
-:root {
+:root,
+[data-theme="dark"] {
   --color-bg: #1a0a14;
   --color-bg-soft: #3d1530;
   --color-rose: #ff4d8d;
@@ -1564,10 +1565,15 @@ html.scroll-story-root body.scroll-story {
 }
 
 @media (min-width: 720px) {
-  .scroll-act--party,
   .scroll-act--memories {
     justify-content: center;
     padding-top: calc(1.25rem + var(--safe-top));
+  }
+
+  .scroll-act--party {
+    justify-content: flex-start;
+    padding-top: calc(1.25rem + var(--safe-top));
+    padding-bottom: calc(2.5rem + var(--safe-bottom));
   }
 
   .act-inner,
@@ -1822,6 +1828,172 @@ body.is-rtl .act-nav {
 .scroll-act--memories .site-footer {
   margin: 0;
   max-width: none;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: calc(0.65rem + var(--safe-top));
+  left: 0.65rem;
+  z-index: 101;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 143, 184, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-gold-light);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--glow-gold);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+body.is-rtl .theme-toggle {
+  left: auto;
+  right: 0.65rem;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --color-bg: #fff8fc;
+  --color-bg-soft: #ffe8f0;
+  --color-rose: #e91e63;
+  --color-rose-light: #c2185b;
+  --color-gold: #f9a825;
+  --color-gold-light: #f57f17;
+  --color-teal: #00897b;
+  --color-cream: #3d1530;
+  --color-text: #3d1530;
+  --color-muted: #8b4a6b;
+  --color-meme-accent: #f9a825;
+  --glow-rose: 0 0 18px rgba(233, 30, 99, 0.2);
+  --glow-gold: 0 0 16px rgba(249, 168, 37, 0.22);
+}
+
+[data-theme="light"] .page-bg {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -5%, rgba(255, 77, 141, 0.18), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(0, 212, 170, 0.12), transparent 50%),
+    radial-gradient(ellipse 60% 45% at 100% 60%, rgba(255, 193, 7, 0.14), transparent 45%),
+    linear-gradient(165deg, #fff8fc 0%, #fff0f6 48%, #ffe4ef 100%);
+}
+
+[data-theme="light"] .sparkles span {
+  opacity: 0.35;
+}
+
+[data-theme="light"] .card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 240, 248, 0.92) 100%
+  );
+  border-color: rgba(255, 77, 141, 0.22);
+  box-shadow: 0 10px 28px rgba(233, 30, 99, 0.1);
+}
+
+[data-theme="light"] .card:hover {
+  border-color: rgba(249, 168, 37, 0.45);
+}
+
+[data-theme="light"] .section-title {
+  color: #c2185b;
+}
+
+[data-theme="light"] .hero-names {
+  text-shadow: 0 2px 12px rgba(233, 30, 99, 0.15);
+}
+
+[data-theme="light"] .hero-eyebrow {
+  color: #c2185b;
+}
+
+[data-theme="light"] .countdown-unit {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 77, 141, 0.1),
+    rgba(255, 255, 255, 0.85)
+  );
+  border-color: rgba(255, 193, 7, 0.35);
+}
+
+[data-theme="light"] .countdown-value {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .countdown-label {
+  color: var(--color-rose-light);
+}
+
+[data-theme="light"] .rsvp-form input[type="text"],
+[data-theme="light"] .rsvp-form textarea {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-text);
+  border-color: rgba(255, 77, 141, 0.28);
+}
+
+[data-theme="light"] .rsvp-radio {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 77, 141, 0.2);
+}
+
+[data-theme="light"] .act-nav {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 77, 141, 0.22);
+}
+
+[data-theme="light"] .act-nav-dot {
+  background: rgba(61, 21, 48, 0.18);
+}
+
+[data-theme="light"] .act-nav-dot.is-active {
+  background: linear-gradient(180deg, var(--color-rose), var(--color-gold));
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 77, 141, 0.25);
+  color: #f57f17;
+}
+
+[data-theme="light"] .scroll-hint {
+  color: #c2185b;
+}
+
+[data-theme="light"] .photo-stack-frame {
+  background: #fff;
+  border-color: rgba(255, 77, 141, 0.45);
+  box-shadow:
+    0 16px 36px rgba(233, 30, 99, 0.12),
+    0 0 0 1px rgba(255, 143, 184, 0.25);
+}
+
+[data-theme="light"] .lang-toggle {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(255, 77, 141, 0.25);
+}
+
+[data-theme="light"] .landing-btn {
+  box-shadow: 0 8px 24px rgba(233, 30, 99, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {
