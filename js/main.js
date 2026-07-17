@@ -92,16 +92,6 @@
     }
     document.querySelector('[data-ui="labelVenue"]').textContent =
       uiLabels.labelVenue || ui.labelVenue || "Venue";
-    const labelDress = document.querySelector('[data-ui="labelDressCode"]');
-    if (labelDress) {
-      labelDress.textContent =
-        uiLabels.labelDressCode || ui.labelDressCode || "Dress code";
-    }
-    const labelProgram = document.querySelector('[data-ui="labelProgram"]');
-    if (labelProgram) {
-      labelProgram.textContent =
-        uiLabels.labelProgram || ui.labelProgram || "Evening";
-    }
     set("maps-link", uiLabels.openMaps || ui.openMaps || "Open location in Maps");
     set("gallery-heading", uiLabels.galleryTitle || ui.galleryTitle || "Our memories");
     set(
@@ -280,18 +270,6 @@
     if (detailTime) {
       detailTime.textContent = eventMeta.time || "6:00 PM";
       detailTime.lang = detailLang;
-    }
-
-    const detailDress = document.getElementById("detail-dress");
-    if (detailDress) {
-      detailDress.textContent = eventMeta.dressCode || "";
-      detailDress.lang = detailLang;
-    }
-
-    const detailProgram = document.getElementById("detail-program");
-    if (detailProgram) {
-      detailProgram.textContent = eventMeta.program || "";
-      detailProgram.lang = detailLang;
     }
 
     const names = getNames();

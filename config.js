@@ -16,15 +16,11 @@ window.WEDDING_CONFIG = {
     dateLine: "Wednesday · 30 September 2026",
     dateDetail: "30 / 9 / 2026",
     time: "6:00 PM",
-    dressCode: "Formal & festive",
-    program: "Welcome drinks, dinner & dancing under the stars",
   },
   eventAr: {
     dateLine: "الأربعاء · ٣٠ سبتمبر ٢٠٢٦",
     dateDetail: "٣٠ / ٩ / ٢٠٢٦",
     time: "٦:٠٠ مساءً",
-    dressCode: "زي رسمي وأنيق",
-    program: "استقبال، عشاء ورقص حتى آخر الليل",
   },
   /** Always shown in Arabic on both invitation pages. */
   quranVerse: {
@@ -121,8 +117,6 @@ window.UI_COPY = {
   labelDate: "📅 Date",
   labelTime: "🕕 Time",
   labelVenue: "🏛️ Venue",
-  labelDressCode: "👗 Dress code",
-  labelProgram: "🥂 Evening",
   openMaps: "🗺️ Open location in Maps",
   galleryTitle: "💖 Our memories",
   galleryLead: "A little stack of our favorite moments",
@@ -152,8 +146,6 @@ window.UI_COPY_AR = {
   labelDate: "📅 التاريخ",
   labelTime: "🕕 الموعد",
   labelVenue: "🏛️ المكان",
-  labelDressCode: "👗 الزي",
-  labelProgram: "🥂 أجواء المساء",
   openMaps: "🗺️ الموقع على الخريطة",
   galleryTitle: "💖 ذكرياتنا",
   galleryLead: "لمحات من أجمل لحظاتنا",
