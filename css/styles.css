@@ -340,12 +340,9 @@ body.is-ltr .hero-names .name {
   letter-spacing: 0.03em;
 }
 
-.name-groom {
-  color: var(--color-cream);
-}
-
+.name-groom,
 .name-bride {
-  color: var(--color-gold-light);
+  color: var(--color-cream);
 }
 
 .hero-names .ampersand {
@@ -409,6 +406,7 @@ body.is-ltr .hero-names .name {
 html[lang="ar"] .lyrics-line,
 body.is-rtl .lyrics-line {
   font-family: var(--font-names-ar);
+  font-style: italic;
   font-size: clamp(1rem, 4.5vw, 1.15rem);
   line-height: 1.75;
 }
@@ -416,6 +414,7 @@ body.is-rtl .lyrics-line {
 html[lang="en"] .lyrics-line,
 body.is-ltr .lyrics-line {
   font-family: var(--font-names-en);
+  font-style: italic;
   letter-spacing: 0.02em;
 }
 
@@ -446,7 +445,7 @@ body.is-ltr .lyrics-line {
 
 .hero-date {
   font-size: 0.95rem;
-  color: var(--color-gold-light);
+  color: var(--color-rose-light);
   font-weight: 700;
 }
 
@@ -1012,6 +1011,7 @@ body.is-rtl .details-row dd {
 
 .lyrics-panel-ar .lyrics-line {
   font-family: var(--font-names-ar);
+  font-style: italic;
   font-size: clamp(0.92rem, 3.8vw, 1.05rem);
   line-height: 1.75;
 }
@@ -1988,22 +1988,22 @@ body.is-rtl .theme-toggle {
   --color-bg-soft: #fceef4;
   --color-rose: #d81b60;
   --color-rose-light: #ad1457;
-  --color-gold: #6aab6a;
-  --color-gold-light: #4d8f4d;
-  --color-teal: #5c9e8a;
+  --color-gold: #d4a0b8;
+  --color-gold-light: #c27898;
+  --color-teal: #c97898;
   --color-cream: #3d1530;
   --color-text: #3d1530;
   --color-muted: #7a5568;
-  --color-meme-accent: #6aab6a;
+  --color-meme-accent: #e891b0;
   --color-thread: #d81b60;
   --color-thread-soft: rgba(216, 27, 96, 0.32);
   --glow-rose: 0 0 20px rgba(216, 27, 96, 0.16);
-  --glow-gold: 0 0 18px rgba(106, 171, 106, 0.18);
+  --glow-gold: 0 0 18px rgba(212, 160, 184, 0.22);
 }
 
 [data-theme="light"] .page-bg {
   background:
-    radial-gradient(ellipse 70% 50% at 15% 88%, rgba(144, 190, 144, 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 15% 88%, rgba(232, 145, 176, 0.2), transparent 55%),
     radial-gradient(ellipse 70% 50% at 85% 90%, rgba(255, 182, 193, 0.24), transparent 55%),
     radial-gradient(ellipse 85% 58% at 50% -8%, rgba(255, 182, 193, 0.32), transparent 58%),
     linear-gradient(175deg, #fffbfc 0%, #fff6f9 42%, #fce8f0 100%);
@@ -2033,7 +2033,7 @@ body.is-rtl .theme-toggle {
 }
 
 [data-theme="light"] .card:hover {
-  border-color: rgba(106, 171, 106, 0.45);
+  border-color: rgba(216, 27, 96, 0.4);
 }
 
 [data-theme="light"] .section-title {
