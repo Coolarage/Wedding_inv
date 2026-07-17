@@ -104,9 +104,6 @@
     set("rsvp-label-attending", copy.rsvpAttending);
     set("rsvp-attending-yes", copy.rsvpAttendingYes);
     set("rsvp-attending-no", copy.rsvpAttendingNo);
-    set("rsvp-label-plus-one", copy.rsvpPlusOne);
-    set("rsvp-plus-one-yes", copy.rsvpPlusOneYes);
-    set("rsvp-plus-one-no", copy.rsvpPlusOneNo);
     set("rsvp-label-message", copy.rsvpMessage);
     set("rsvp-submit", copy.rsvpSubmit);
   }

@@ -94,7 +94,6 @@
     return {
       name: (formData.get("name") || "").trim(),
       attending: formData.get("attending") || "",
-      plus_one: formData.get("plusOne") || "",
       message: (formData.get("message") || "").trim(),
       page: pageSource(),
     };
