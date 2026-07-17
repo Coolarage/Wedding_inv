@@ -2247,6 +2247,17 @@ body.is-rtl .splash-names {
   }
 }
 
+.scroll-act--memories .story-thread,
+.scroll-act--memories .act-deco {
+  display: none;
+}
+
+.scroll-act--memories .act-inner,
+.scroll-act--memories .act-inner--tall {
+  position: relative;
+  z-index: 3;
+}
+
 .story-thread {
   position: absolute;
   top: calc(0.75rem + var(--safe-top));
