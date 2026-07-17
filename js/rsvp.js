@@ -4,11 +4,16 @@
   const rsvpCfg = cfg.rsvp || {};
   const supabaseCfg = rsvpCfg.supabase || {};
   const RSVP_DONE_KEY = "wedding-rsvp-done";
-  const RSVP_COMPLETE_DELAY_MS = 900;
+  const RSVP_BURST_MS = 700;
+  const RSVP_GOTO_ACT_MS = 1300;
 
   const form = document.getElementById("rsvp-form");
   const statusEl = document.getElementById("rsvp-status");
   if (!form) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   function rsvpStorageKey() {
     return `${RSVP_DONE_KEY}:${pageSource()}`;
@@ -49,6 +54,35 @@
     });
   }
 
+  function launchRsvpBurst(container) {
+    if (!container || reducedMotion) return;
+
+    const layer = document.createElement("div");
+    layer.className = "rsvp-burst";
+    layer.setAttribute("aria-hidden", "true");
+    const emojis = ["💕", "💖", "💗", "✨", "🌸", "💍"];
+
+    for (let i = 0; i < 24; i++) {
+      const particle = document.createElement("span");
+      particle.className = "rsvp-burst-particle";
+      particle.textContent = emojis[i % emojis.length];
+      particle.style.setProperty("--bx", `${random(-120, 120)}px`);
+      particle.style.setProperty("--by", `${random(-140, -40)}px`);
+      particle.style.setProperty("--rot", `${random(-160, 160)}deg`);
+      particle.style.setProperty("--delay", `${random(0, 280)}ms`);
+      particle.style.left = `${random(12, 88)}%`;
+      particle.style.top = `${random(35, 75)}%`;
+      layer.appendChild(particle);
+    }
+
+    container.appendChild(layer);
+    window.setTimeout(() => layer.remove(), 1800);
+  }
+
+  function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   function finishRsvpFlow() {
     markRsvpComplete();
     setStatus(
@@ -56,10 +90,19 @@
       "success"
     );
 
+    const section = document.getElementById("rsvp-section");
+    if (section) {
+      section.classList.add("rsvp-card--success");
+      launchRsvpBurst(section);
+      window.setTimeout(() => {
+        section.classList.add("rsvp-card--leaving");
+      }, RSVP_BURST_MS);
+    }
+
     window.setTimeout(() => {
       removeRsvpCard();
       goToActThree();
-    }, RSVP_COMPLETE_DELAY_MS);
+    }, reducedMotion ? 400 : RSVP_GOTO_ACT_MS);
   }
 
   if (isRsvpComplete()) {

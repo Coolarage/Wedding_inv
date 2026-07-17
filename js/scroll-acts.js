@@ -10,7 +10,7 @@
 
   const CELEBRATION = {
     1: { emojis: ["💍", "✨", "💕", "🌸", "💫"], count: 28 },
-    2: { emojis: ["🎉", "🥂", "✨", "🎊", "⭐"], count: 32 },
+    2: { emojis: ["🎉", "✨", "🎊", "🌹", "⭐"], count: 32 },
     3: { emojis: ["💖", "📸", "💕", "🌹", "✨"], count: 26 },
   };
 
@@ -29,6 +29,8 @@
     if (!acts.length) return;
 
     document.body.classList.add("scroll-story");
+    buildVeilLayer();
+    buildStoryThreads();
     buildActNav();
     bindScrollHints();
     bindWheel();
@@ -208,6 +210,11 @@
     if (!act) return;
     if (!force && scrollLocked && index === activeIndex) return;
 
+    const prevIndex = activeIndex;
+    if (!instant && !reducedMotion && prevIndex !== index) {
+      playVeilTransition();
+    }
+
     scrollLocked = !instant && SCROLL_LOCK_MS > 0;
     activeIndex = index;
 
@@ -326,6 +333,35 @@
 
     root.classList.toggle("scroll-free-act3", deepInTallAct);
     root.classList.toggle("scroll-free-tall", deepInTallAct);
+  }
+
+  function buildVeilLayer() {
+    if (document.getElementById("veil-transition")) return;
+    const veil = document.createElement("div");
+    veil.id = "veil-transition";
+    veil.className = "veil-transition";
+    veil.setAttribute("aria-hidden", "true");
+    document.body.appendChild(veil);
+  }
+
+  function playVeilTransition() {
+    const veil = document.getElementById("veil-transition");
+    if (!veil) return;
+    veil.classList.remove("is-active");
+    void veil.offsetWidth;
+    veil.classList.add("is-active");
+  }
+
+  function buildStoryThreads() {
+    acts.forEach((act) => {
+      if (act.querySelector(".story-thread")) return;
+      const thread = document.createElement("div");
+      thread.className = "story-thread";
+      thread.setAttribute("aria-hidden", "true");
+      thread.innerHTML =
+        '<span class="story-thread-line"></span><span class="story-thread-bloom">🌸</span>';
+      act.insertBefore(thread, act.firstChild);
+    });
   }
 
   function buildActNav() {
