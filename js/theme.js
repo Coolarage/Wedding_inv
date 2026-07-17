@@ -12,6 +12,36 @@
     }
   }
 
+  function themeArtPath(theme) {
+    const cfg = window.WEDDING_CONFIG || {};
+    const art = cfg.themeArt || {};
+    const isSpecial =
+      document.documentElement.getAttribute("data-invite-type") === "special";
+    const root = isSpecial ? ".." : ".";
+    const file = theme === "dark" ? art.dark : art.light;
+    if (!file) return "";
+    return `${root}/${file.replace(/^\.\//, "")}`;
+  }
+
+  function mountBgArt() {
+    if (!document.querySelector(".page-bg") || document.querySelector(".page-bg-art")) {
+      return;
+    }
+
+    const art = document.createElement("div");
+    art.className = "page-bg-art";
+    art.setAttribute("aria-hidden", "true");
+    document.querySelector(".page-bg").after(art);
+    updateBgArt(document.documentElement.getAttribute("data-theme") || DEFAULT_THEME);
+  }
+
+  function updateBgArt(theme) {
+    const art = document.querySelector(".page-bg-art");
+    if (!art) return;
+    const path = themeArtPath(theme);
+    art.style.backgroundImage = path ? `url("${path}")` : "none";
+  }
+
   function applyTheme(theme) {
     const next = theme === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
@@ -27,6 +57,7 @@
       meta.content = next === "light" ? "#fff0f6" : "#c2185b";
     }
 
+    updateBgArt(next);
     updateToggle(next);
   }
 
@@ -89,9 +120,14 @@
 
   applyTheme(storedTheme());
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountToggle);
-  } else {
+  function init() {
+    mountBgArt();
     mountToggle();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
   }
 })();

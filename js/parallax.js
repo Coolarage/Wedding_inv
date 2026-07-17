@@ -6,8 +6,9 @@
   if (!document.querySelector(".scroll-act")) return;
 
   const pageBg = document.querySelector(".page-bg");
+  const pageBgArt = document.querySelector(".page-bg-art");
   const sparkles = Array.from(document.querySelectorAll(".sparkles span"));
-  if (!pageBg && !sparkles.length) return;
+  if (!pageBg && !pageBgArt && !sparkles.length) return;
 
   let ticking = false;
 
@@ -15,6 +16,9 @@
     const y = window.scrollY;
     if (pageBg) {
       pageBg.style.transform = `translate3d(0, ${y * 0.06}px, 0)`;
+    }
+    if (pageBgArt) {
+      pageBgArt.style.transform = `translate3d(0, ${y * 0.04}px, 0)`;
     }
     sparkles.forEach((node, index) => {
       const rate = 0.018 + index * 0.008;
