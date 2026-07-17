@@ -565,7 +565,7 @@ main {
 }
 
 .details-row dt {
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-gold);
   font-size: 0.88rem;
 }
@@ -614,13 +614,13 @@ body.is-rtl .details-row dd {
 }
 
 .btn-maps {
-  background: linear-gradient(135deg, var(--color-teal) 0%, #00a884 100%);
-  color: #042a22;
-  box-shadow: 0 4px 20px rgba(0, 212, 170, 0.4);
+  background: linear-gradient(135deg, var(--color-rose) 0%, #c2185b 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(216, 27, 96, 0.35);
 }
 
 .btn-maps:hover {
-  box-shadow: 0 6px 28px rgba(0, 212, 170, 0.55);
+  box-shadow: 0 6px 28px rgba(216, 27, 96, 0.5);
 }
 
 .btn-maps:active {
@@ -1686,6 +1686,7 @@ body.rsvp-completed .scroll-act--party {
 
 .party-hub-block--details .details-row dt {
   font-size: 0.88rem;
+  font-weight: 800;
 }
 
 .party-hub-block--details .details-row dd {
