@@ -354,6 +354,7 @@
 
   function buildStoryThreads() {
     acts.forEach((act) => {
+      if (act.classList.contains("scroll-act--memories")) return;
       if (act.querySelector(".story-thread")) return;
       const thread = document.createElement("div");
       thread.className = "story-thread";
