@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="gFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1200" fill="url(#gFade)"/>
+  <ellipse cx="140" cy="1020" rx="120" ry="48" fill="#8fbc8f" fill-opacity="0.14"/>
+  <ellipse cx="660" cy="1040" rx="130" ry="52" fill="#8fbc8f" fill-opacity="0.12"/>
+  <path d="M0 940 Q220 880 420 920 T800 900 L800 1200 L0 1200 Z" fill="#7cb87c" fill-opacity="0.1"/>
+  <circle cx="200" cy="780" r="34" fill="#ffb7c5" fill-opacity="0.16"/>
+  <circle cx="600" cy="840" r="38" fill="#ffb7c5" fill-opacity="0.14"/>
+  <circle cx="400" cy="700" r="28" fill="#ffc8d4" fill-opacity="0.12"/>
+  <path d="M180 820 C190 740 205 690 215 640" stroke="#7cb87c" stroke-width="2.5" stroke-opacity="0.16" stroke-linecap="round"/>
+  <path d="M620 870 C632 790 650 720 662 660" stroke="#7cb87c" stroke-width="2.5" stroke-opacity="0.14" stroke-linecap="round"/>
+</svg>

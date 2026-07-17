@@ -80,32 +80,62 @@ video {
   z-index: -1;
   pointer-events: none;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center bottom;
   background-size: cover;
-  opacity: 0.62;
+  opacity: 0.28;
   will-change: transform;
   transition: opacity 0.8s ease, background-image 0.8s ease;
   mask-image: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.82) 42%,
-    rgba(0, 0, 0, 0.72) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 35%,
+    rgba(0, 0, 0, 0.5) 100%
   );
   -webkit-mask-image: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.82) 42%,
-    rgba(0, 0, 0, 0.72) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 35%,
+    rgba(0, 0, 0, 0.5) 100%
   );
 }
 
+.page-bg-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 [data-theme="light"] .page-bg-art {
-  opacity: 0.68;
+  opacity: 0.32;
+  background-position: center 85%;
+}
+
+[data-theme="light"] .page-bg-art::after {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 251, 252, 0.82) 0%,
+    rgba(255, 244, 248, 0.72) 45%,
+    rgba(255, 236, 244, 0.88) 100%
+  );
 }
 
 [data-theme="dark"] .page-bg-art {
-  opacity: 0.58;
-  background-position: center center;
+  opacity: 0.22;
+  background-position: center top;
+}
+
+[data-theme="dark"] .page-bg-art::after {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 8, 16, 0.55) 0%,
+    rgba(12, 6, 12, 0.78) 50%,
+    rgba(8, 4, 10, 0.92) 100%
+  );
+}
+
+body.landing-page .page-bg-art {
+  display: none !important;
 }
 
 @keyframes bg-shift {
@@ -1971,14 +2001,18 @@ body.is-rtl .theme-toggle {
 
 [data-theme="light"] .page-bg {
   background:
-    radial-gradient(ellipse 90% 70% at 50% 18%, rgba(255, 255, 255, 0.52), transparent 62%),
-    linear-gradient(175deg, rgba(255, 251, 252, 0.62) 0%, rgba(255, 244, 248, 0.42) 100%);
+    radial-gradient(ellipse 85% 58% at 50% -8%, rgba(255, 182, 193, 0.28), transparent 58%),
+    radial-gradient(ellipse 50% 42% at 4% 96%, rgba(144, 190, 144, 0.12), transparent 52%),
+    radial-gradient(ellipse 48% 38% at 96% 48%, rgba(255, 192, 203, 0.16), transparent 50%),
+    linear-gradient(175deg, #fffbfc 0%, #fff6f9 42%, #fce8f0 100%);
 }
 
 [data-theme="dark"] .page-bg {
   background:
-    radial-gradient(ellipse 80% 58% at 50% 12%, rgba(30, 10, 28, 0.5), transparent 58%),
-    linear-gradient(165deg, rgba(18, 8, 16, 0.72) 0%, rgba(8, 4, 10, 0.78) 100%);
+    radial-gradient(ellipse 80% 55% at 50% 0%, rgba(180, 80, 120, 0.22), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 100% 85%, rgba(80, 35, 75, 0.18), transparent 50%),
+    radial-gradient(ellipse 55% 40% at 0% 75%, rgba(50, 25, 60, 0.22), transparent 45%),
+    linear-gradient(165deg, #2a1228 0%, var(--color-bg) 50%, #08040a 100%);
 }
 
 [data-theme="light"] .sparkles span {
