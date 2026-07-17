@@ -1,17 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" fill="none" aria-hidden="true">
   <defs>
-    <radialGradient id="moonGlow" cx="50%" cy="16%" r="38%">
-      <stop offset="0%" stop-color="#e8c4d0" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#e8c4d0" stop-opacity="0"/>
+    <radialGradient id="moonGlow" cx="50%" cy="14%" r="42%">
+      <stop offset="0%" stop-color="#f4dce8" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#c97898" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#c97898" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="poolGlow" cx="50%" cy="72%" r="35%">
+      <stop offset="0%" stop-color="#4a7898" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#4a7898" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="800" height="1200" fill="url(#moonGlow)"/>
-  <circle cx="640" cy="170" r="48" fill="#f0dce6" fill-opacity="0.12"/>
-  <circle cx="120" cy="300" r="1.2" fill="#fff" fill-opacity="0.28"/>
-  <circle cx="260" cy="210" r="1" fill="#fff" fill-opacity="0.22"/>
-  <circle cx="400" cy="270" r="1.1" fill="#fff" fill-opacity="0.24"/>
-  <circle cx="540" cy="330" r="1" fill="#fff" fill-opacity="0.2"/>
-  <circle cx="700" cy="250" r="1.2" fill="#fff" fill-opacity="0.26"/>
-  <path d="M0 920 Q260 860 520 890 T800 870 L800 1200 L0 1200 Z" fill="#1a0818" fill-opacity="0.28"/>
-  <path d="M0 980 Q320 920 560 950 T800 930 L800 1200 L0 1200 Z" fill="#0d040a" fill-opacity="0.2"/>
+  <ellipse cx="620" cy="165" rx="62" ry="62" fill="#f8eef2" fill-opacity="0.22"/>
+  <ellipse cx="620" cy="165" rx="48" ry="48" fill="#fff5f9" fill-opacity="0.14"/>
+  <circle cx="110" cy="280" r="1.8" fill="#fff" fill-opacity="0.55"/>
+  <circle cx="250" cy="200" r="1.4" fill="#fff" fill-opacity="0.45"/>
+  <circle cx="390" cy="260" r="1.6" fill="#fff" fill-opacity="0.5"/>
+  <circle cx="530" cy="320" r="1.3" fill="#fff" fill-opacity="0.42"/>
+  <circle cx="710" cy="240" r="1.7" fill="#fff" fill-opacity="0.48"/>
+  <circle cx="180" cy="420" r="1.2" fill="#fff" fill-opacity="0.35"/>
+  <circle cx="640" cy="380" r="1.4" fill="#fff" fill-opacity="0.38"/>
+  <ellipse cx="400" cy="880" rx="280" ry="80" fill="url(#poolGlow)"/>
+  <path d="M0 900 Q260 840 520 870 T800 850 L800 1200 L0 1200 Z" fill="#1a0818" fill-opacity="0.45"/>
+  <path d="M0 970 Q320 910 560 940 T800 920 L800 1200 L0 1200 Z" fill="#0d040a" fill-opacity="0.35"/>
+  <rect x="280" y="720" width="240" height="120" rx="8" fill="#c9a0b0" fill-opacity="0.08"/>
+  <rect x="300" y="740" width="80" height="60" rx="4" fill="#e8c4d0" fill-opacity="0.12"/>
+  <rect x="420" y="740" width="80" height="60" rx="4" fill="#e8c4d0" fill-opacity="0.12"/>
 </svg>
