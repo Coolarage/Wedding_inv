@@ -3,7 +3,12 @@
     "(prefers-reduced-motion: reduce)"
   ).matches;
   if (reducedMotion) return;
-  if (!document.querySelector(".scroll-act")) return;
+  if (
+    !document.querySelector(".scroll-act") &&
+    !document.body.classList.contains("landing-page")
+  ) {
+    return;
+  }
 
   const pageBg = document.querySelector(".page-bg");
   const pageBgArt = document.querySelector(".page-bg-art");
