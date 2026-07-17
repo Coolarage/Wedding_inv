@@ -27,10 +27,10 @@ window.WEDDING_CONFIG = {
     text: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
     ref: "الروم · ٣٠:٢١",
   },
-  /** JW Marriott venue photos — Day = light theme, Night = dark theme. */
+  /** Soft theme ambiance (SVG — no pixelation). */
   themeArt: {
-    light: "assets/backgrounds/venue-day.png",
-    dark: "assets/backgrounds/venue-night.png",
+    light: "assets/backgrounds/garden-light.svg",
+    dark: "assets/backgrounds/evening-dark.svg",
   },
   photos: [
     "Photo1.jpeg",

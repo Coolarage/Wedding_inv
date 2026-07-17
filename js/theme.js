@@ -24,6 +24,7 @@
   }
 
   function mountBgArt() {
+    if (document.body.classList.contains("landing-page")) return;
     if (!document.querySelector(".page-bg") || document.querySelector(".page-bg-art")) {
       return;
     }
