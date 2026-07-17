@@ -27,6 +27,11 @@ window.WEDDING_CONFIG = {
     text: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
     ref: "الروم · ٣٠:٢١",
   },
+  /** Theme background art — swap paths for your own PNG/WebP photos if you prefer. */
+  themeArt: {
+    light: "assets/backgrounds/garden-light.svg",
+    dark: "assets/backgrounds/evening-dark.svg",
+  },
   photos: [
     "Photo1.jpeg",
     "Photo2.jpeg",
