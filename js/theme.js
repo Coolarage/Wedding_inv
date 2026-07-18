@@ -91,14 +91,25 @@
     btn.textContent = isLight ? "🌙" : "☀️";
   }
 
+  function ensureTopControls() {
+    let bar = document.querySelector(".top-controls");
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.className = "top-controls";
+      document.body.appendChild(bar);
+    }
+    return bar;
+  }
+
   function mountToggle() {
     if (!document.body || document.getElementById("theme-toggle")) return;
 
+    const bar = ensureTopControls();
     const btn = document.createElement("button");
     btn.type = "button";
     btn.id = "theme-toggle";
     btn.className = "theme-toggle";
-    document.body.appendChild(btn);
+    bar.appendChild(btn);
     updateToggle(
       document.documentElement.getAttribute("data-theme") || DEFAULT_THEME
     );

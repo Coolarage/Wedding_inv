@@ -1941,12 +1941,25 @@ body.is-rtl .act-nav {
   max-width: none;
 }
 
-/* Theme toggle */
-.theme-toggle {
+/* Top controls — theme + audio */
+.top-controls {
   position: fixed;
   top: calc(0.65rem + var(--safe-top));
   left: 0.65rem;
   z-index: 101;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+body.is-rtl .top-controls {
+  left: auto;
+  right: 0.65rem;
+}
+
+.theme-toggle,
+.audio-toggle {
+  position: static;
   width: 42px;
   height: 42px;
   display: flex;
@@ -1969,18 +1982,22 @@ body.is-rtl .act-nav {
   -webkit-tap-highlight-color: transparent;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.audio-toggle:hover {
   transform: scale(1.05);
   border-color: var(--color-rose-light);
 }
 
-.theme-toggle:active {
+.theme-toggle:active,
+.audio-toggle:active {
   transform: scale(0.96);
 }
 
-body.is-rtl .theme-toggle {
-  left: auto;
-  right: 0.65rem;
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .audio-toggle {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(255, 77, 141, 0.25);
+  color: #ad1457;
 }
 
 /* Light theme — romantic garden */
@@ -2089,12 +2106,6 @@ body.is-rtl .theme-toggle {
 
 [data-theme="light"] .act-nav-dot.is-active {
   background: linear-gradient(180deg, var(--color-rose), var(--color-gold));
-}
-
-[data-theme="light"] .theme-toggle {
-  background: rgba(255, 255, 255, 0.88);
-  border-color: rgba(255, 77, 141, 0.25);
-  color: #ad1457;
 }
 
 [data-theme="light"] .scroll-hint {

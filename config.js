@@ -40,7 +40,16 @@ window.WEDDING_CONFIG = {
     "Photo5.jpeg",
     "Photo6.jpeg",
     "Photo7.jpeg",
+    "Photo8.jpeg",
+    "Photo9.jpeg",
+    "Photo10.jpeg",
+    "Photo11.jpeg",
   ],
+  /** Background music per invitation language. */
+  audio: {
+    en: "assets/audio/sky-full-of-stars.mp3",
+    ar: "assets/audio/wayah.mp3",
+  },
   /**
    * RSVP backend — use **one** of these:
    *
@@ -135,6 +144,8 @@ window.UI_COPY = {
     "RSVP is not connected yet. Please contact the couple directly.",
   themeLight: "Switch to light mode",
   themeDark: "Switch to dark mode",
+  audioMute: "Mute music",
+  audioUnmute: "Unmute music",
   scrollHint1: "Scroll to celebrate",
   scrollHint2: "Our memories await",
   dualLyricsTitleAr: "🎵 أغنيتنا",
@@ -163,6 +174,8 @@ window.UI_COPY_AR = {
   rsvpNotConfigured: "التأكيد غير متصل بعد. يرجى التواصل معنا مباشرة.",
   themeLight: "التبديل إلى الوضع الفاتح",
   themeDark: "التبديل إلى الوضع الداكن",
+  audioMute: "كتم الصوت",
+  audioUnmute: "تشغيل الصوت",
   scrollHint1: "مرّر للاحتفال",
   scrollHint2: "ذكرياتنا بانتظاركم",
   dualLyricsTitleAr: "🎵 أغنيتنا",
