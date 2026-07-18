@@ -1,144 +1,184 @@
 (function () {
-  const cfg = window.WEDDING_CONFIG || {};
-  const audioCfg = cfg.audio || {};
-  const pageLang =
-    document.documentElement.getAttribute("data-invite-lang") || "";
-  const isSpecial =
-    document.documentElement.getAttribute("data-invite-type") === "special";
-  const isLanding = document.body.classList.contains("landing-page");
+  function start() {
+    const cfg = window.WEDDING_CONFIG || {};
+    const audioCfg = cfg.audio || {};
+    const pageLang =
+      document.documentElement.getAttribute("data-invite-lang") || "";
+    const isSpecial =
+      document.documentElement.getAttribute("data-invite-type") === "special";
+    const isLanding =
+      document.body && document.body.classList.contains("landing-page");
 
-  if (isLanding || isSpecial || (pageLang !== "en" && pageLang !== "ar")) {
-    return;
-  }
-
-  const track = (audioCfg[pageLang] || "").trim();
-  if (!track) return;
-
-  const MUTE_KEY = "wedding-audio-muted";
-  const root = ".";
-  const src = `${root}/${track.replace(/^\.\//, "")}`;
-
-  let audio = null;
-  let unlocked = false;
-  let muted = false;
-
-  try {
-    muted = localStorage.getItem(MUTE_KEY) === "1";
-  } catch {
-    muted = false;
-  }
-
-  function uiCopy() {
-    if (pageLang === "ar" && window.UI_COPY_AR) return window.UI_COPY_AR;
-    return window.UI_COPY || {};
-  }
-
-  function ensureControls() {
-    let bar = document.querySelector(".top-controls");
-    if (!bar) {
-      bar = document.createElement("div");
-      bar.className = "top-controls";
-      document.body.appendChild(bar);
-      const themeBtn = document.getElementById("theme-toggle");
-      if (themeBtn) bar.appendChild(themeBtn);
+    if (isLanding || isSpecial || (pageLang !== "en" && pageLang !== "ar")) {
+      return;
     }
-    return bar;
-  }
 
-  function updateMuteButton() {
-    const btn = document.getElementById("audio-toggle");
-    if (!btn) return;
-    const ui = uiCopy();
-    btn.setAttribute("aria-pressed", muted ? "true" : "false");
-    btn.setAttribute(
-      "aria-label",
-      muted
-        ? ui.audioUnmute || "Unmute music"
-        : ui.audioMute || "Mute music"
-    );
-    btn.title = btn.getAttribute("aria-label");
-    btn.textContent = muted ? "🔇" : "🔊";
-  }
+    const track = (audioCfg[pageLang] || "").trim();
+    if (!track) return;
 
-  function mountMuteButton() {
-    if (document.getElementById("audio-toggle")) return;
-    const bar = ensureControls();
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.id = "audio-toggle";
-    btn.className = "audio-toggle";
-    bar.appendChild(btn);
-    updateMuteButton();
-    btn.addEventListener("click", () => {
-      setMuted(!muted);
-      tryPlay();
-    });
-  }
+    const MUTE_KEY = "wedding-audio-muted";
+    const src = track.replace(/^\.\//, "");
+    const absoluteSrc = new URL(src, window.location.href).href;
 
-  function setMuted(next) {
-    muted = Boolean(next);
-    if (audio) audio.muted = muted;
+    let audio = null;
+    let playing = false;
+    let muted = false;
+    let unlockBound = false;
+
     try {
-      localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
+      muted = localStorage.getItem(MUTE_KEY) === "1";
     } catch {
-      /* storage unavailable */
+      muted = false;
     }
-    updateMuteButton();
-  }
 
-  function tryPlay() {
-    if (!audio) return;
-    audio.muted = muted;
-    const playPromise = audio.play();
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise
+    function uiCopy() {
+      if (pageLang === "ar" && window.UI_COPY_AR) return window.UI_COPY_AR;
+      return window.UI_COPY || {};
+    }
+
+    function ensureControls() {
+      let bar = document.querySelector(".top-controls");
+      if (!bar) {
+        bar = document.createElement("div");
+        bar.className = "top-controls";
+        document.body.appendChild(bar);
+      }
+      const themeBtn = document.getElementById("theme-toggle");
+      if (themeBtn && themeBtn.parentElement !== bar) {
+        bar.appendChild(themeBtn);
+      }
+      return bar;
+    }
+
+    function updateMuteButton() {
+      const btn = document.getElementById("audio-toggle");
+      if (!btn) return;
+      const ui = uiCopy();
+      btn.setAttribute("aria-pressed", muted ? "true" : "false");
+      btn.setAttribute(
+        "aria-label",
+        muted
+          ? ui.audioUnmute || "Unmute music"
+          : ui.audioMute || "Mute music"
+      );
+      btn.title = btn.getAttribute("aria-label");
+      btn.textContent = muted ? "🔇" : "🔊";
+      btn.classList.toggle("is-waiting", !playing && !muted);
+    }
+
+    function mountMuteButton() {
+      if (document.getElementById("audio-toggle")) {
+        updateMuteButton();
+        return;
+      }
+      const bar = ensureControls();
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.id = "audio-toggle";
+      btn.className = "audio-toggle";
+      bar.appendChild(btn);
+      updateMuteButton();
+      btn.addEventListener("click", () => {
+        // First tap always tries to start audio (browser autoplay unlock).
+        if (!playing) {
+          setMuted(false);
+          playNow(true);
+          return;
+        }
+        setMuted(!muted);
+        if (!muted) playNow(true);
+      });
+    }
+
+    function setMuted(next) {
+      muted = Boolean(next);
+      if (audio) audio.muted = muted;
+      try {
+        localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
+      } catch {
+        /* storage unavailable */
+      }
+      updateMuteButton();
+    }
+
+    function playNow(forceUnmuteGesture) {
+      if (!audio) return Promise.resolve(false);
+      if (forceUnmuteGesture) audio.muted = muted;
+      else audio.muted = muted;
+
+      return audio
+        .play()
         .then(() => {
-          unlocked = true;
+          playing = true;
+          updateMuteButton();
+          return true;
         })
         .catch(() => {
-          /* autoplay blocked until gesture */
+          playing = false;
+          updateMuteButton();
+          return false;
         });
     }
-  }
 
-  function unlockAndPlay() {
-    if (unlocked) return;
-    tryPlay();
-  }
+    function bindUnlock() {
+      if (unlockBound) return;
+      unlockBound = true;
+      const events = ["pointerdown", "touchstart", "click", "keydown"];
+      const onUnlock = () => {
+        playNow(true).then((ok) => {
+          if (ok) {
+            events.forEach((name) =>
+              document.removeEventListener(name, onUnlock, true)
+            );
+          }
+        });
+      };
+      events.forEach((name) => {
+        document.addEventListener(name, onUnlock, true);
+      });
+    }
 
-  function createAudio() {
-    audio = new Audio(src);
-    audio.loop = true;
-    audio.preload = "auto";
-    audio.muted = muted;
-    audio.setAttribute("playsinline", "");
-  }
+    function createAudio() {
+      audio = document.createElement("audio");
+      audio.id = "invite-audio";
+      audio.src = absoluteSrc;
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.playsInline = true;
+      audio.setAttribute("playsinline", "");
+      audio.setAttribute("webkit-playsinline", "");
+      audio.muted = muted;
+      audio.style.display = "none";
+      document.body.appendChild(audio);
 
-  function init() {
+      audio.addEventListener("playing", () => {
+        playing = true;
+        updateMuteButton();
+      });
+      audio.addEventListener("pause", () => {
+        if (audio.ended) return;
+        playing = false;
+        updateMuteButton();
+      });
+      audio.addEventListener("error", () => {
+        playing = false;
+        updateMuteButton();
+        console.warn("Wedding audio failed to load:", absoluteSrc, audio.error);
+      });
+    }
+
     createAudio();
     mountMuteButton();
-    tryPlay();
 
-    const unlockEvents = ["pointerdown", "touchstart", "keydown", "scroll"];
-    const onUnlock = () => {
-      unlockAndPlay();
-      if (unlocked) {
-        unlockEvents.forEach((eventName) => {
-          window.removeEventListener(eventName, onUnlock, true);
-        });
-      }
-    };
-    unlockEvents.forEach((eventName) => {
-      window.addEventListener(eventName, onUnlock, {
-        capture: true,
-        passive: true,
-      });
+    // Try unmuted autoplay; if blocked, keep waiting for a tap.
+    playNow(false).then((ok) => {
+      if (!ok) bindUnlock();
     });
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", start);
   } else {
-    init();
+    start();
   }
 })();

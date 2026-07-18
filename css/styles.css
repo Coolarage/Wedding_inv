@@ -1993,6 +1993,22 @@ body.is-rtl .top-controls {
   transform: scale(0.96);
 }
 
+.audio-toggle.is-waiting {
+  animation: audio-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes audio-pulse {
+  0%,
+  100% {
+    box-shadow: var(--glow-gold);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(216, 27, 96, 0.22);
+    transform: scale(1.06);
+  }
+}
+
 [data-theme="light"] .theme-toggle,
 [data-theme="light"] .audio-toggle {
   background: rgba(255, 255, 255, 0.88);
