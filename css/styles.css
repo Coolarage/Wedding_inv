@@ -1204,6 +1204,12 @@ body.is-rtl .details-row dd {
   gap: 0.15rem 0.35rem;
 }
 
+html[lang="ar"] #footer-names,
+body.is-rtl #footer-names {
+  font-family: var(--font-names-ar);
+  font-style: italic;
+}
+
 .footer-emoji {
   font-size: 1.35rem;
   animation: heartbeat 1.2s ease-in-out infinite;

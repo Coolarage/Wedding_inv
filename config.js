@@ -80,7 +80,7 @@ window.INVITATION_COPY = {
       "إحساس إنه أحلى وأغلى الناس",
       "خلى قلبي يقول لي خلاص إهدى بقى لقينا",
     ],
-    footerLine: "🎉 بانتظاركم بفرح",
+    footerLine: "🎉 بانتظاركم بفرحنا",
     footerEmoji: "💕",
     footerNamesJoin: " و ",
     photoAltPrefix: "ذكرى",
