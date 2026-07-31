@@ -70,8 +70,8 @@ window.INVITATION_COPY = {
   ar: {
     lang: "ar",
     dir: "rtl",
-    documentTitle: "همس و مهاب — دعوتكم لحفل الزفاف",
-    metaDescription: "أنتم مدعوون لمشاركتنا فرحة همس و مهاب — ٣٠ سبتمبر ٢٠٢٦",
+    documentTitle: "Hams&Mohab Wedding",
+    metaDescription: "أنتم مدعوون إلى حفل زفاف Hams&Mohab — ٣٠ سبتمبر ٢٠٢٦",
     eyebrow: "💌 ندعوكم لمشاركتنا فرحتنا",
     tagline: "",
     lyricsLines: [
@@ -96,8 +96,8 @@ window.INVITATION_COPY = {
   en: {
     lang: "en",
     dir: "ltr",
-    documentTitle: "Hams & Mohab — You're Invited",
-    metaDescription: "You're invited to celebrate with Hams & Mohab — 30 September 2026",
+    documentTitle: "Hams&Mohab Wedding",
+    metaDescription: "You're invited to Hams&Mohab Wedding — 30 September 2026",
     eyebrow: "💌 We invite you to share our joy",
     tagline: "✨ Together we begin a new chapter",
     lyricsLines: [
