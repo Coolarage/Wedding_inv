@@ -191,6 +191,97 @@ body.landing-page .page-bg-art {
   animation-delay: 1.8s;
 }
 
+/* Couple side portraits — bride left, groom right */
+.couple-flank {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.couple-flank-img {
+  position: absolute;
+  bottom: 0;
+  height: min(78vh, 720px);
+  width: auto;
+  max-width: 34vw;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0.72;
+  filter: saturate(0.92) contrast(0.98);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 18%,
+    #000 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 18%,
+    #000 82%,
+    transparent 100%
+  );
+}
+
+.couple-flank-bride {
+  left: 0;
+  transform: translateX(-6%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+.couple-flank-groom {
+  right: 0;
+  transform: translateX(6%);
+  -webkit-mask-image: linear-gradient(
+    270deg,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    270deg,
+    #000 0%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+[data-theme="dark"] .couple-flank-img {
+  opacity: 0.55;
+  filter: saturate(0.85) brightness(0.88) contrast(1.02);
+}
+
+@media (max-width: 899px) {
+  .couple-flank-img {
+    height: min(52vh, 420px);
+    max-width: 42vw;
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 619px) {
+  .couple-flank-img {
+    height: min(38vh, 280px);
+    max-width: 46vw;
+    opacity: 0.32;
+    bottom: -2%;
+  }
+}
+
 @keyframes float-sparkle {
   0%,
   100% {
@@ -1311,6 +1402,8 @@ body.is-rtl .quran-text {
 }
 
 .landing {
+  position: relative;
+  z-index: 1;
   max-width: 22rem;
   margin: 0 auto;
   text-align: center;
@@ -1418,6 +1511,7 @@ html.scroll-story-root body.scroll-story {
 /* ═══ Three-act scroll story ═══ */
 .scroll-act {
   position: relative;
+  z-index: 1;
   min-height: 100dvh;
   min-height: 100svh;
   scroll-snap-align: start;
