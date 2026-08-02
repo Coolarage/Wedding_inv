@@ -4,7 +4,7 @@ window.WEDDING_CONFIG = {
   bride: "همس",
   groomEn: "Mohab",
   brideEn: "Hams",
-  date: "2026-09-30T18:00:00+03:00",
+  date: "2026-09-30T17:00:00+03:00",
   venue: {
     nameEn: "La Terrace, JW Marriott",
     areaEn: "Fifth Settlement, New Cairo",
@@ -15,12 +15,12 @@ window.WEDDING_CONFIG = {
   eventEn: {
     dateLine: "Wednesday · 30 September 2026",
     dateDetail: "30 / 9 / 2026",
-    time: "6:00 PM",
+    time: "5:00 PM",
   },
   eventAr: {
     dateLine: "الأربعاء · ٣٠ سبتمبر ٢٠٢٦",
     dateDetail: "٣٠ / ٩ / ٢٠٢٦",
-    time: "٦:٠٠ مساءً",
+    time: "٥:٠٠ مساءً",
   },
   /** Always shown in Arabic on both invitation pages. */
   quranVerse: {

@@ -17,7 +17,7 @@
 
   const assetRoot = isSpecial ? ".." : ".";
 
-  const weddingDate = new Date(cfg.date || "2026-09-30T18:00:00+03:00");
+  const weddingDate = new Date(cfg.date || "2026-09-30T17:00:00+03:00");
   const STACK_VISIBLE = 3;
   const STACK_INTERVAL_MS = 2000;
   const STACK_EXIT_MS = 360;
@@ -268,7 +268,7 @@
 
     const detailTime = document.getElementById("detail-time");
     if (detailTime) {
-      detailTime.textContent = eventMeta.time || "6:00 PM";
+      detailTime.textContent = eventMeta.time || "5:00 PM";
       detailTime.lang = detailLang;
     }
 
