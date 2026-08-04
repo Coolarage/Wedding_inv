@@ -13,6 +13,7 @@
     const cfg = window.WEDDING_CONFIG || {};
     return {
       logo: cfg.logo || "assets/logo/mh-monogram.png",
+      logoDark: cfg.logoDark || "assets/logo/mh-monogram-glow.png",
       names: `${cfg.groomEn || "Mohab"} & ${cfg.brideEn || "Hams"}`,
       date: cfg.eventEn?.dateLine || "Wednesday · 30 September 2026",
     };
@@ -32,7 +33,10 @@
           <span class="splash-thread-bloom">🌸</span>
           <span class="splash-thread-line"></span>
         </div>
-        <img class="splash-logo" src="" alt="" width="104" height="142" decoding="async" />
+        <div class="couple-logo-wrap couple-logo-wrap--splash splash-logo-wrap" aria-hidden="true">
+          <img class="couple-logo couple-logo--theme-light splash-logo" src="" alt="" decoding="async" />
+          <img class="couple-logo couple-logo--theme-dark splash-logo" src="" alt="" decoding="async" />
+        </div>
         <p class="splash-names"></p>
         <p class="splash-date"></p>
       </div>
@@ -40,7 +44,8 @@
     document.body.prepend(splash);
 
     const copy = splashCopy();
-    splash.querySelector(".splash-logo").src = copy.logo;
+    splash.querySelector(".couple-logo--theme-light").src = copy.logo;
+    splash.querySelector(".couple-logo--theme-dark").src = copy.logoDark;
     splash.querySelector(".splash-names").textContent = copy.names;
     splash.querySelector(".splash-date").textContent = copy.date;
   }
