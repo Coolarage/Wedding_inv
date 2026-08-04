@@ -4,6 +4,7 @@ window.WEDDING_CONFIG = {
   bride: "همس",
   groomEn: "Mohab",
   brideEn: "Hams",
+  logo: "assets/logo/mh-monogram.png",
   date: "2026-09-30T17:00:00+03:00",
   venue: {
     nameEn: "La Terrace, JW Marriott",
