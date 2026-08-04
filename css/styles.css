@@ -308,6 +308,33 @@ body.is-rtl .lang-bar {
   opacity: 0.9;
 }
 
+.couple-logo {
+  display: block;
+  width: min(7rem, 32vw);
+  height: auto;
+  margin: 0 auto 0.55rem;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 14px rgba(232, 90, 143, 0.28));
+}
+
+.couple-logo--landing {
+  width: min(6.25rem, 28vw);
+  margin: 0 auto 0.75rem;
+}
+
+[data-theme="light"] .couple-logo {
+  filter: drop-shadow(0 2px 12px rgba(120, 40, 70, 0.2));
+}
+
+.splash-logo {
+  display: block;
+  width: min(6.5rem, 30vw);
+  height: auto;
+  margin: 0 auto 0.85rem;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 14px rgba(232, 90, 143, 0.28));
+}
+
 .hero-names {
   margin: 0;
   font-size: clamp(2.75rem, 13vw, 4.35rem);
@@ -1399,6 +1426,11 @@ body.is-rtl .quran-text {
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--color-muted);
+}
+
+.landing-btn-sub[lang="ar"] {
+  font-family: var(--font-names-ar);
+  font-size: 0.9rem;
 }
 
 body.scroll-story {
