@@ -23,23 +23,11 @@
     return `${root}/${file.replace(/^\.\//, "")}`;
   }
 
-  function logoPath(theme) {
-    const cfg = window.WEDDING_CONFIG || {};
-    const isSpecial =
-      document.documentElement.getAttribute("data-invite-type") === "special";
-    const root = isSpecial ? ".." : ".";
-    const file =
-      theme === "dark"
-        ? cfg.logoDark || cfg.logo || "assets/logo/mh-monogram-glow.png"
-        : cfg.logo || "assets/logo/mh-monogram.png";
-    return `${root}/${file.replace(/^\.\//, "")}`;
-  }
-
-  function updateLogos(theme) {
-    const path = logoPath(theme);
-    document.querySelectorAll(".couple-logo, .splash-logo").forEach((img) => {
-      if (img.getAttribute("src") !== path) img.setAttribute("src", path);
-    });
+  function updateBgArt(theme) {
+    const art = document.querySelector(".page-bg-art");
+    if (!art) return;
+    const path = themeArtPath(theme);
+    art.style.backgroundImage = path ? `url("${path}")` : "none";
   }
 
   function mountBgArt() {
@@ -53,13 +41,6 @@
     art.setAttribute("aria-hidden", "true");
     document.querySelector(".page-bg").after(art);
     updateBgArt(document.documentElement.getAttribute("data-theme") || DEFAULT_THEME);
-  }
-
-  function updateBgArt(theme) {
-    const art = document.querySelector(".page-bg-art");
-    if (!art) return;
-    const path = themeArtPath(theme);
-    art.style.backgroundImage = path ? `url("${path}")` : "none";
   }
 
   function applyTheme(theme) {
@@ -78,7 +59,6 @@
     }
 
     updateBgArt(next);
-    updateLogos(next);
     updateToggle(next);
   }
 
