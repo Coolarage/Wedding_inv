@@ -23,6 +23,25 @@
     return `${root}/${file.replace(/^\.\//, "")}`;
   }
 
+  function logoPath(theme) {
+    const cfg = window.WEDDING_CONFIG || {};
+    const isSpecial =
+      document.documentElement.getAttribute("data-invite-type") === "special";
+    const root = isSpecial ? ".." : ".";
+    const file =
+      theme === "dark"
+        ? cfg.logoDark || cfg.logo || "assets/logo/mh-monogram-glow.png"
+        : cfg.logo || "assets/logo/mh-monogram.png";
+    return `${root}/${file.replace(/^\.\//, "")}`;
+  }
+
+  function updateLogos(theme) {
+    const path = logoPath(theme);
+    document.querySelectorAll(".couple-logo, .splash-logo").forEach((img) => {
+      if (img.getAttribute("src") !== path) img.setAttribute("src", path);
+    });
+  }
+
   function mountBgArt() {
     if (document.body.classList.contains("landing-page")) return;
     if (!document.querySelector(".page-bg") || document.querySelector(".page-bg-art")) {
@@ -59,6 +78,7 @@
     }
 
     updateBgArt(next);
+    updateLogos(next);
     updateToggle(next);
   }
 
