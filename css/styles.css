@@ -332,6 +332,18 @@ body.is-rtl .lang-bar {
   object-position: center;
 }
 
+.couple-logo--theme-dark {
+  display: none;
+}
+
+[data-theme="dark"] .couple-logo--theme-light {
+  display: none;
+}
+
+[data-theme="dark"] .couple-logo--theme-dark {
+  display: block;
+}
+
 [data-theme="light"] .couple-logo,
 [data-theme="light"] .splash-logo {
   filter: saturate(1.08) contrast(1.04)
