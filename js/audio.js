@@ -23,7 +23,6 @@
     let audio = null;
     let playing = false;
     let userMuted = false;
-    let awaitingUnmute = false;
     let unlockBound = false;
     const unlockEvents = [
       "pointerdown",
@@ -65,19 +64,16 @@
       const btn = document.getElementById("audio-toggle");
       if (!btn) return;
       const ui = uiCopy();
-      const showMuted = userMuted || awaitingUnmute;
-      btn.setAttribute("aria-pressed", showMuted ? "true" : "false");
+      btn.setAttribute("aria-pressed", userMuted ? "true" : "false");
       btn.setAttribute(
         "aria-label",
         userMuted
           ? ui.audioUnmute || "Unmute music"
-          : awaitingUnmute
-            ? ui.audioUnmute || "Tap to hear music"
-            : ui.audioMute || "Mute music"
+          : ui.audioMute || "Mute music"
       );
       btn.title = btn.getAttribute("aria-label");
-      btn.textContent = userMuted || awaitingUnmute ? "🔇" : "🔊";
-      btn.classList.toggle("is-waiting", awaitingUnmute || (!playing && !userMuted));
+      btn.textContent = userMuted ? "🔇" : "🔊";
+      btn.classList.toggle("is-waiting", !playing && !userMuted);
     }
 
     function mountMuteButton() {
@@ -94,18 +90,15 @@
       updateMuteButton();
       btn.addEventListener("click", (e) => {
         e.stopPropagation();
-        if (awaitingUnmute || !playing) {
-          userMuted = false;
-          awaitingUnmute = false;
-          persistMute(false);
-          unmuteAndPlay();
+        if (!playing && !userMuted) {
+          playWithSound(true);
           return;
         }
         userMuted = !userMuted;
         persistMute(userMuted);
         if (audio) audio.muted = userMuted;
-        if (!userMuted) unmuteAndPlay();
-        updateMuteButton();
+        if (!userMuted) playWithSound(true);
+        else updateMuteButton();
       });
     }
 
@@ -117,84 +110,34 @@
       }
     }
 
-    function unmuteAndPlay() {
-      if (!audio) return Promise.resolve(false);
-      awaitingUnmute = false;
-      if (!userMuted) audio.muted = false;
-
-      return audio
-        .play()
-        .then(() => {
-          playing = true;
-          updateMuteButton();
-          return true;
-        })
-        .catch(() => {
-          playing = audio && !audio.paused;
-          updateMuteButton();
-          return false;
-        });
+    function syncMuteState() {
+      if (!audio) return;
+      audio.muted = userMuted;
     }
 
-    function tryMutedAutoplay() {
+    function playWithSound(fromGesture) {
       if (!audio || userMuted) return Promise.resolve(false);
-      audio.muted = true;
+      syncMuteState();
+
       return audio
         .play()
         .then(() => {
           playing = true;
-          awaitingUnmute = true;
           updateMuteButton();
-          bindUnlock();
+          if (fromGesture) removeUnlockListeners();
           return true;
         })
         .catch(() => {
           playing = false;
-          awaitingUnmute = false;
           updateMuteButton();
+          if (!fromGesture) bindUnlock();
           return false;
         });
     }
 
-    function attemptAutoplay() {
-      if (!audio) return Promise.resolve(false);
-      if (userMuted) {
-        audio.muted = true;
-        return audio.play().then(() => {
-          playing = true;
-          updateMuteButton();
-          return true;
-        }).catch(() => false);
-      }
-
-      audio.muted = false;
-      return audio
-        .play()
-        .then(() => {
-          playing = true;
-          awaitingUnmute = false;
-          updateMuteButton();
-          return true;
-        })
-        .catch(() => tryMutedAutoplay().then((ok) => {
-          if (!ok) bindUnlock();
-          return ok;
-        }));
-    }
-
     function unlockFromGesture() {
-      if (userMuted) return;
-      if (awaitingUnmute || !playing) {
-        unmuteAndPlay().then((ok) => {
-          if (ok) removeUnlockListeners();
-        });
-        return;
-      }
-      if (!playing) {
-        attemptAutoplay().then((ok) => {
-          if (ok && !awaitingUnmute) removeUnlockListeners();
-        });
-      }
+      if (userMuted || playing) return;
+      playWithSound(true);
     }
 
     function removeUnlockListeners() {
@@ -206,7 +149,7 @@
     }
 
     function bindUnlock() {
-      if (unlockBound) return;
+      if (unlockBound || playing || userMuted) return;
       unlockBound = true;
 
       const onUnlock = () => unlockFromGesture();
@@ -240,7 +183,7 @@
       audio.playsInline = true;
       audio.setAttribute("playsinline", "");
       audio.setAttribute("webkit-playsinline", "");
-      audio.muted = userMuted;
+      syncMuteState();
       audio.style.display = "none";
       document.body.appendChild(audio);
 
@@ -254,11 +197,10 @@
         updateMuteButton();
       });
       audio.addEventListener("canplaythrough", () => {
-        if (!playing && !userMuted) attemptAutoplay();
+        if (!playing && !userMuted) playWithSound(false);
       });
       audio.addEventListener("error", () => {
         playing = false;
-        awaitingUnmute = false;
         updateMuteButton();
         console.warn("Wedding audio failed to load:", absoluteSrc, audio.error);
       });
@@ -267,14 +209,11 @@
     preloadTrack();
     createAudio();
     mountMuteButton();
-
-    attemptAutoplay();
+    playWithSound(false);
 
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden || userMuted) return;
-      if (!playing || awaitingUnmute) {
-        attemptAutoplay();
-      }
+      if (document.hidden || userMuted || playing) return;
+      playWithSound(false);
     });
   }
 
