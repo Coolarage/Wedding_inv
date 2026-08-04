@@ -22,13 +22,24 @@
 
     let audio = null;
     let playing = false;
-    let muted = false;
+    let userMuted = false;
+    let awaitingUnmute = false;
     let unlockBound = false;
+    const unlockEvents = [
+      "pointerdown",
+      "touchstart",
+      "touchend",
+      "click",
+      "keydown",
+      "scroll",
+      "wheel",
+    ];
+    let unlockHandlers = [];
 
     try {
-      muted = localStorage.getItem(MUTE_KEY) === "1";
+      userMuted = localStorage.getItem(MUTE_KEY) === "1";
     } catch {
-      muted = false;
+      userMuted = false;
     }
 
     function uiCopy() {
@@ -54,16 +65,19 @@
       const btn = document.getElementById("audio-toggle");
       if (!btn) return;
       const ui = uiCopy();
-      btn.setAttribute("aria-pressed", muted ? "true" : "false");
+      const showMuted = userMuted || awaitingUnmute;
+      btn.setAttribute("aria-pressed", showMuted ? "true" : "false");
       btn.setAttribute(
         "aria-label",
-        muted
+        userMuted
           ? ui.audioUnmute || "Unmute music"
-          : ui.audioMute || "Mute music"
+          : awaitingUnmute
+            ? ui.audioUnmute || "Tap to hear music"
+            : ui.audioMute || "Mute music"
       );
       btn.title = btn.getAttribute("aria-label");
-      btn.textContent = muted ? "🔇" : "🔊";
-      btn.classList.toggle("is-waiting", !playing && !muted);
+      btn.textContent = userMuted || awaitingUnmute ? "🔇" : "🔊";
+      btn.classList.toggle("is-waiting", awaitingUnmute || (!playing && !userMuted));
     }
 
     function mountMuteButton() {
@@ -78,33 +92,35 @@
       btn.className = "audio-toggle";
       bar.appendChild(btn);
       updateMuteButton();
-      btn.addEventListener("click", () => {
-        // First tap always tries to start audio (browser autoplay unlock).
-        if (!playing) {
-          setMuted(false);
-          playNow(true);
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (awaitingUnmute || !playing) {
+          userMuted = false;
+          awaitingUnmute = false;
+          persistMute(false);
+          unmuteAndPlay();
           return;
         }
-        setMuted(!muted);
-        if (!muted) playNow(true);
+        userMuted = !userMuted;
+        persistMute(userMuted);
+        if (audio) audio.muted = userMuted;
+        if (!userMuted) unmuteAndPlay();
+        updateMuteButton();
       });
     }
 
-    function setMuted(next) {
-      muted = Boolean(next);
-      if (audio) audio.muted = muted;
+    function persistMute(next) {
       try {
-        localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
+        localStorage.setItem(MUTE_KEY, next ? "1" : "0");
       } catch {
         /* storage unavailable */
       }
-      updateMuteButton();
     }
 
-    function playNow(forceUnmuteGesture) {
+    function unmuteAndPlay() {
       if (!audio) return Promise.resolve(false);
-      if (forceUnmuteGesture) audio.muted = muted;
-      else audio.muted = muted;
+      awaitingUnmute = false;
+      if (!userMuted) audio.muted = false;
 
       return audio
         .play()
@@ -114,28 +130,104 @@
           return true;
         })
         .catch(() => {
-          playing = false;
+          playing = audio && !audio.paused;
           updateMuteButton();
           return false;
         });
     }
 
+    function tryMutedAutoplay() {
+      if (!audio || userMuted) return Promise.resolve(false);
+      audio.muted = true;
+      return audio
+        .play()
+        .then(() => {
+          playing = true;
+          awaitingUnmute = true;
+          updateMuteButton();
+          bindUnlock();
+          return true;
+        })
+        .catch(() => {
+          playing = false;
+          awaitingUnmute = false;
+          updateMuteButton();
+          return false;
+        });
+    }
+
+    function attemptAutoplay() {
+      if (!audio) return Promise.resolve(false);
+      if (userMuted) {
+        audio.muted = true;
+        return audio.play().then(() => {
+          playing = true;
+          updateMuteButton();
+          return true;
+        }).catch(() => false);
+      }
+
+      audio.muted = false;
+      return audio
+        .play()
+        .then(() => {
+          playing = true;
+          awaitingUnmute = false;
+          updateMuteButton();
+          return true;
+        })
+        .catch(() => tryMutedAutoplay().then((ok) => {
+          if (!ok) bindUnlock();
+          return ok;
+        }));
+    }
+
+    function unlockFromGesture() {
+      if (userMuted) return;
+      if (awaitingUnmute || !playing) {
+        unmuteAndPlay().then((ok) => {
+          if (ok) removeUnlockListeners();
+        });
+        return;
+      }
+      if (!playing) {
+        attemptAutoplay().then((ok) => {
+          if (ok && !awaitingUnmute) removeUnlockListeners();
+        });
+      }
+    }
+
+    function removeUnlockListeners() {
+      unlockHandlers.forEach(({ name, fn, target }) => {
+        target.removeEventListener(name, fn, true);
+      });
+      unlockHandlers = [];
+      unlockBound = false;
+    }
+
     function bindUnlock() {
       if (unlockBound) return;
       unlockBound = true;
-      const events = ["pointerdown", "touchstart", "click", "keydown"];
-      const onUnlock = () => {
-        playNow(true).then((ok) => {
-          if (ok) {
-            events.forEach((name) =>
-              document.removeEventListener(name, onUnlock, true)
-            );
-          }
+
+      const onUnlock = () => unlockFromGesture();
+      unlockEvents.forEach((name) => {
+        const target = name === "scroll" || name === "wheel" ? window : document;
+        target.addEventListener(name, onUnlock, {
+          capture: true,
+          passive: true,
         });
-      };
-      events.forEach((name) => {
-        document.addEventListener(name, onUnlock, true);
+        unlockHandlers.push({ name, fn: onUnlock, target });
       });
+    }
+
+    function preloadTrack() {
+      if (document.querySelector('link[data-audio-preload="1"]')) return;
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "audio";
+      link.href = absoluteSrc;
+      link.setAttribute("data-audio-preload", "1");
+      document.head.appendChild(link);
     }
 
     function createAudio() {
@@ -144,10 +236,11 @@
       audio.src = absoluteSrc;
       audio.loop = true;
       audio.preload = "auto";
+      audio.autoplay = true;
       audio.playsInline = true;
       audio.setAttribute("playsinline", "");
       audio.setAttribute("webkit-playsinline", "");
-      audio.muted = muted;
+      audio.muted = userMuted;
       audio.style.display = "none";
       document.body.appendChild(audio);
 
@@ -160,19 +253,28 @@
         playing = false;
         updateMuteButton();
       });
+      audio.addEventListener("canplaythrough", () => {
+        if (!playing && !userMuted) attemptAutoplay();
+      });
       audio.addEventListener("error", () => {
         playing = false;
+        awaitingUnmute = false;
         updateMuteButton();
         console.warn("Wedding audio failed to load:", absoluteSrc, audio.error);
       });
     }
 
+    preloadTrack();
     createAudio();
     mountMuteButton();
 
-    // Try unmuted autoplay; if blocked, keep waiting for a tap.
-    playNow(false).then((ok) => {
-      if (!ok) bindUnlock();
+    attemptAutoplay();
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden || userMuted) return;
+      if (!playing || awaitingUnmute) {
+        attemptAutoplay();
+      }
     });
   }
 
