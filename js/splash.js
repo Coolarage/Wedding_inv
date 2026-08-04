@@ -11,8 +11,16 @@
 
   function splashCopy() {
     const cfg = window.WEDDING_CONFIG || {};
+    const theme =
+      document.documentElement.getAttribute("data-theme") === "dark"
+        ? "dark"
+        : "light";
+    const logoFile =
+      theme === "dark"
+        ? cfg.logoDark || cfg.logo || "assets/logo/mh-monogram-glow.png"
+        : cfg.logo || "assets/logo/mh-monogram.png";
     return {
-      logo: cfg.logo || "assets/logo/mh-monogram.png",
+      logo: logoFile,
       names: `${cfg.groomEn || "Mohab"} & ${cfg.brideEn || "Hams"}`,
       date: cfg.eventEn?.dateLine || "Wednesday · 30 September 2026",
     };
@@ -32,7 +40,9 @@
           <span class="splash-thread-bloom">🌸</span>
           <span class="splash-thread-line"></span>
         </div>
-        <img class="splash-logo" src="" alt="" width="104" height="142" decoding="async" />
+        <div class="couple-logo-wrap couple-logo-wrap--splash">
+          <img class="splash-logo couple-logo" src="" alt="" decoding="async" />
+        </div>
         <p class="splash-names"></p>
         <p class="splash-date"></p>
       </div>
